@@ -1,9 +1,8 @@
+class Read
 
-class ContactManagement
-
-    def initialize(input,output)
+    def initialize(input)
         @input = input
-        @output = output
+        #@output = output
     end
 
 
@@ -28,13 +27,18 @@ class ContactManagement
                         :address => "03 Hatton Garden",
                         :postcode => "EC1R 6JP"}] 
     end
-
-
-    def data_input_output
-        contact_key = @input.gets.to_i  
+    def fetch_contact
+        contact_key = @input
         if contact_key.is_a?Integer
-            @output.puts "#{dummy_contacts[contact_key - 1]}"
-        else @ouput.puts "main page"
+            return "#{dummy_contacts[contact_key -1]}"
+        else 
+            return "main page"
+    end
+end
+
+end
+class InputOutput
+    def data_input_output
         end
     end
 end
