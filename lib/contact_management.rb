@@ -37,6 +37,9 @@ class FindContact
 
 end
 
+class Create 
+
+end
 
 class InputOutput
 
@@ -47,7 +50,7 @@ class InputOutput
 
     def data_input_output
      result = FindContact.new(@input.gets.to_i).fetch_contact
-    return "#{result}"
+     @output.puts "#{result}"
     end
 end
 

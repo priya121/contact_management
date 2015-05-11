@@ -25,8 +25,8 @@ describe "contact management program" do
         @input = StringIO.new("3")
         @output = StringIO.new
         find_three = InputOutput.new(@input,@output)
-        result = find_three.data_input_output
-        expect(result).to start_with("{:name=>\"Emma Jones\",")
+        find_three.data_input_output
+        expect(@output.string.chomp).to start_with("{:name=>\"Emma Jones\",")
     end
 
 
