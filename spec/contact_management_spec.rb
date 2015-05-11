@@ -11,13 +11,13 @@ describe "contact management program" do
 
     it "shows contact details of Anna Smith when key 1 is pressed" do 
         @input = StringIO.new("1")
-        view = contact_management.read
+        view = contact_management.data_input_output
         expect(@output.string.chomp).to start_with("{:name=>\"Anna Smith\",")
     end
 
-    xit "shows contact details of Emma Jones when key 3 is pressed" do 
+    it "shows contact details of Emma Jones when key 3 is pressed" do 
         @input = StringIO.new("3")
-        view = contact_management.read
+        view = contact_management.data_input_output
         expect(@output.string.chomp).to start_with("{:name=>\"Emma Jones\",")
     end
 

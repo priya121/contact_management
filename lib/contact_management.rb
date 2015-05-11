@@ -8,7 +8,7 @@ class ContactManagement
 
 
     def dummy_contacts
-        contacts = [{:name => "Anna Smith",
+        @contacts = [{:name => "Anna Smith",
             :dob => "10.03.1989", 
             :address => "12 Forlease Road",
             :postcode => "SW9 0LG"},
@@ -31,10 +31,9 @@ class ContactManagement
 
 
     def data_input_output
-
         contact_key = @input.gets.to_i  
-        if contact_key == 1 || 3
-            @output.puts "#{contacts[contact_key-1]}"
+        if contact_key.is_a?Integer
+            @output.puts "#{dummy_contacts[contact_key - 1]}"
         else @ouput.puts "main page"
         end
     end
