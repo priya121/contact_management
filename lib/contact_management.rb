@@ -1,10 +1,9 @@
-class Read
+class FindContact
 
     def initialize(input)
         @input = input
         #@output = output
     end
-
 
     def dummy_contacts
         @contacts = [{:name => "Anna Smith",
@@ -13,7 +12,7 @@ class Read
             :postcode => "SW9 0LG"},
 
             {:name => "Bob Smith", 
-                :DOB  => "02.12.1988",
+                :dob  => "02.12.1988",
                 :address => "10 Cedars Road",
                 :postcode => "KT11 1RY"},
 
@@ -27,19 +26,29 @@ class Read
                         :address => "03 Hatton Garden",
                         :postcode => "EC1R 6JP"}] 
     end
+
     def fetch_contact
         contact_key = @input
         if contact_key.is_a?Integer
             return "#{dummy_contacts[contact_key -1]}"
         else 
             return "main page"
+        end
     end
-end
 
 end
+
+
+
 class InputOutput
+    def initilaize(input,output)
+        @input = input
+        @output = output
+    end
+
     def data_input_output
-        end
+        result = FindContact.new(@input.gets).fetch_data
+        puts result
     end
 end
 
