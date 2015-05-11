@@ -12,7 +12,7 @@ class FindContact
             :postcode => "SW9 0LG"},
 
             {:name => "Bob Smith", 
-                :dob  => "02.12.1988",
+                :DOB  => "02.12.1988",
                 :address => "10 Cedars Road",
                 :postcode => "KT11 1RY"},
 
@@ -26,7 +26,6 @@ class FindContact
                         :address => "03 Hatton Garden",
                         :postcode => "EC1R 6JP"}] 
     end
-
     def fetch_contact
         contact_key = @input
         if contact_key.is_a?Integer
@@ -39,16 +38,16 @@ class FindContact
 end
 
 
-
 class InputOutput
-    def initilaize(input,output)
+
+    def initialize(input,output)
         @input = input
         @output = output
     end
 
     def data_input_output
-        result = FindContact.new(@input.gets).fetch_data
-        puts result
+     result = FindContact.new(@input.gets.to_i).fetch_contact
+    return "#{result}"
     end
 end
 

@@ -11,7 +11,8 @@ describe "contact management program" do
 
     it "returns the second contact if 2 is entered" do 
         read = FindContact.new(2)
-        expect(read.fetch_contact).to start_with(:name=>"Bob Smith",)
+        expect(read.fetch_contact).to start_with({:name=>"Bob Smith", :dob=> "02.12.1988", :address=> "10 Cedars Road", :postcode=> "KT11 1RY"})
+                                                
     end
 
     it "returns - main page - if a non-integer is entered" do 
@@ -23,15 +24,11 @@ describe "contact management program" do
     it "shows contact details of Emma Jones when key 3 is pressed" do 
         @input = StringIO.new("3")
         @output = StringIO.new
-        find_three = InputOutput.new
-        expect(find_three.data_input_output).to start_with("{:name=>\"Emma Jones\",")
+        find_three = InputOutput.new(@input,@output)
+        result = find_three.data_input_output
+        expect(result).to start_with("{:name=>\"Emma Jones\",")
     end
 
-    xit "exits to the main page when a user presses any key" do
-        @input = StringIO.new("l")
-        view = contact_management.data_input_output
-        expect(@output.string.chomp).to eq("main page")
-    end
 
     #def read
     #    Read.new(@input)
