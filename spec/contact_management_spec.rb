@@ -1,8 +1,8 @@
 require "contact_management"
 describe "contact management program" do
-    #before do 
-    #    @output = StringIO.new
-    #end
+    before do 
+        @output = StringIO.new
+    end
 
     it "shows all the contact details as soon as the page is loaded" do
         display_contacts = FindContact.new(1).dummy_contacts
@@ -11,7 +11,7 @@ describe "contact management program" do
 
     it "returns the second contact if 2 is entered" do 
         read = FindContact.new(2)
-        expect(read.fetch_contact).to start_with({:name=>"Bob Smith", :dob=> "02.12.1988", :address=> "10 Cedars Road", :postcode=> "KT11 1RY"})
+        expect(read.fetch_contact).to eq({:name=>"Bob Smith", :dob=> "02.12.1988", :address=> "10 Cedars Road", :postcode=> "KT11 1RY"})
                                                 
     end
 
@@ -29,8 +29,17 @@ describe "contact management program" do
         expect(@output.string.chomp).to start_with("{:name=>\"Emma Jones\",")
     end
 
+    it "goes back to main menu when another key is pressed" do 
+        @input = StringIO.new("l")
+        @output = StringIO.new
+        find_three = InputOutput.new(@input,@output)
+        find_three.data_input_output
+        expect(@output.string.chomp).to end_with("main page")
+    end
 
-    #def read
-    #    Read.new(@input)
-    #end
+    it "adds a new contact, when the relevant details are entered" do 
+        new_contact = Create.new("sara","evans","04.11.1988")
+        result = new_contact.add_contact
+        expect(result).to end_with([{:name => "sara evans",:dob => "04.11.1988"}])
+end
 end

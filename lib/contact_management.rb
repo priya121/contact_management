@@ -6,7 +6,7 @@ class FindContact
     end
 
     def dummy_contacts
-        @contacts = [{:name => "Anna Smith",
+        $contacts = [{:name => "Anna Smith",
             :dob => "10.03.1989", 
             :address => "12 Forlease Road",
             :postcode => "SW9 0LG"},
@@ -27,9 +27,9 @@ class FindContact
                         :postcode => "EC1R 6JP"}] 
     end
     def fetch_contact
-        contact_key = @input
-        if contact_key.is_a?Integer
-            return "#{dummy_contacts[contact_key -1]}"
+        contact_id = @input
+        if contact_id.is_a?Integer 
+            return "#{dummy_contacts[contact_id -1]}"
         else 
             return "main page"
         end
@@ -38,8 +38,18 @@ class FindContact
 end
 
 class Create 
+    def initialize(first_name,last_name,dob)
+       @first_name = first_name
+       @last_name = last_name
+       @dob = dob
+    end
+
+    def add_contact
+        $contacts << {:name => "#{@first_name} #{@last_name}",:dob => "#{@dob}"}
 
 end
+end
+
 
 class InputOutput
 
@@ -51,6 +61,7 @@ class InputOutput
     def data_input_output
      result = FindContact.new(@input.gets.to_i).fetch_contact
      @output.puts "#{result}"
+
     end
 end
 
