@@ -2,4 +2,5 @@
 
 $LOAD_PATH.unshift File.dirname(__FILE__) + '/../lib'
 require "contact_management"
-InputOutput.new(Kernel, Kernel).data_input_output
+ContactsDisplay.new.dummy_contacts
+InputOutput.new(Kernel, Kernel).data_input_output_view

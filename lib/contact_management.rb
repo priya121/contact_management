@@ -1,12 +1,6 @@
-class FindContact
-
-    def initialize(input)
-        @input = input
-        #@output = output
-    end
-
+class ContactsDisplay
     def dummy_contacts
-        $contacts = [{:name => "Anna Smith",
+         $contacts = [{:name => "Anna Smith",
             :dob => "10.03.1989", 
             :address => "12 Forlease Road",
             :postcode => "SW9 0LG"},
@@ -26,52 +20,53 @@ class FindContact
                         :address => "03 Hatton Garden",
                         :postcode => "EC1R 6JP"}] 
     end
+end
+
+class Read
+    def initialize(input)
+        @input = input
+    end
     def fetch_contact
         contact_id = @input
-        if contact_id.is_a?Integer 
-            return "#{dummy_contacts[contact_id -1]}"
+        if contact_id.is_a?Integer and contact_id != 0
+            return "#{ContactsDisplay.new.dummy_contacts[contact_id -1]}"
         else 
             return "main page"
         end
     end
-
 end
 
 class Create 
-    def initialize(first_name,last_name,dob)
-       @first_name = first_name
-       @last_name = last_name
-       @dob = dob
+    def initialize(first_name,last_name,dob,address,postcode)
+        @first_name = first_name
+        @last_name = last_name
+        @dob = dob
+        @address = address
+        @postcode = postcode
     end
 
     def add_contact
-        $contacts << {:name => "#{@first_name} #{@last_name}",:dob => "#{@dob}"}
-
+        $contacts << {:name => "#{@first_name} #{@last_name}",:dob => "#{@dob}", :address => "#{@address}", :postcode => "#{@postcode}"}
+    end
 end
-end
 
+class Update
+    def initialize(first_and_last_name)
+        @first_and_last_name = first_and_last_name
+    end
+end
 
 class InputOutput
-
     def initialize(input,output)
         @input = input
         @output = output
     end
 
-    def data_input_output
-     result = FindContact.new(@input.gets.to_i).fetch_contact
-     @output.puts "#{result}"
-
+    def data_input_output_view
+        result = Read.new(@input.gets.to_i).fetch_contact
+        @output.puts "#{result}"
     end
 end
-
-
-
-
-
-
-
-
 
 
 
