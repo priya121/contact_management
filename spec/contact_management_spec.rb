@@ -11,8 +11,7 @@ describe "contact management program" do
 
     it "returns the second contact if 2 is entered" do 
         read = Read.new(2)
-        expect(read.fetch_contact).to start_with({:name=>"Bob Smith", :dob=> "02.12.1988", :address=> "10 Cedars Road", :postcode=> "KT11 1RY"})
-                                                
+        expect(read.fetch_contact).to eq({:name=>"Bob Smith", :dob=> "02.12.1988", :address=> "10 Cedars Road", :postcode=> "KT11 1RY"})
     end
 
     it "returns - main page - if a non-integer is entered" do 
@@ -42,4 +41,9 @@ describe "contact management program" do
         expect(result).to include({:name => "Sara Evans",:dob => "04.11.1988",:address => "35 Guildford Road", :postcode => "GU22 1EY"})
 end
   
+    it "updates a contact with new data when a new field is entered" do 
+    read = Read.new(1).fetch_contact
+    result = Update.new("Erica Simpson").update
+    expect(result).to include({:name => "Erica Simpson"})
+    end
 end

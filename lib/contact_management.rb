@@ -6,7 +6,7 @@ class ContactsDisplay
             :postcode => "SW9 0LG"},
 
             {:name => "Bob Smith", 
-                :DOB  => "02.12.1988",
+                :dob => "02.12.1988",
                 :address => "10 Cedars Road",
                 :postcode => "KT11 1RY"},
 
@@ -29,7 +29,8 @@ class Read
     def fetch_contact
         contact_id = @input
         if contact_id.is_a?Integer and contact_id != 0
-            return "#{ContactsDisplay.new.dummy_contacts[contact_id -1]}"
+            $selected_contact =  ContactsDisplay.new.dummy_contacts[contact_id -1]
+            return $selected_contact
         else 
             return "main page"
         end
@@ -54,12 +55,22 @@ class Update
     def initialize(first_and_last_name)
         @first_and_last_name = first_and_last_name
     end
-end
+   def update
+   new_values = {:name => "#{@first_and_last_name}"}
+       return $selected_contact.merge!(new_values){|key,v1,v2|v2}
+       
+   end
+   end
 
 class InputOutput
     def initialize(input,output)
         @input = input
         @output = output
+    end
+    
+    def contacts_list
+        @output.puts "View a contact:\nWhich contact would you like to view?"
+        @output.puts ContactsDisplay.new.dummy_contacts
     end
 
     def data_input_output_view
