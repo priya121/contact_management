@@ -22,11 +22,8 @@ class ContactsDisplay
                         :dob => "01.11.1976", 
                         :address => "03 Hatton Garden", 
                         :postcode => "EC1R 6JP"}] 
-
-        contacts.each do |key,value|
-            puts "      #{key} : #{value}"     
-        end 
-    end
+        return contacts
+    end 
 end
 
 class Read
@@ -35,14 +32,7 @@ class Read
     end
     def fetch_contact
         contact_id = @input
-        if contact_id.is_a?Integer and contact_id != 0
-            return ContactsDisplay.new.dummy_contacts[contact_id-1] &&
-                ContactsDisplay.new.dummy_contacts[contact_id -1].each do |key,value|
-                puts "#{key} : #{value}"
-                end
-        else 
-            return "main page"
-        end
+        return ContactsDisplay.new.dummy_contacts[contact_id-1] 
     end
 end
 
@@ -97,14 +87,18 @@ class InputOutput
 
     def contacts_list
         @output.puts "View a contact:\nWhich contact would you like to view?"
-        @output.puts ContactsDisplay.new.dummy_contacts
+        ContactsDisplay.new.dummy_contacts.each do |key,value|
+            @output.puts "      #{key}"
+        end 
     end
 
     def data_input_output_view
-        result = Read.new(@input.gets.to_i).fetch_contact
-        @output.puts "#{result}"
+        #if @input.gets.to_i.is_a?Integer and @input != 0
+            @output.puts Read.new(@input.gets.to_i).fetch_contact
+        #else 
+            #@output.puts "main page"
+        end 
     end
-end
 
 
 
