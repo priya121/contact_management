@@ -47,7 +47,7 @@ class Create
     end
 
     def add_contact
-       ContactsDisplay.new.dummy_contacts << {:name => "#{@first_name} #{@last_name}",:dob => "#{@dob}", :address => "#{@address}", :postcode => "#{@postcode}"}
+        ContactsDisplay.new.dummy_contacts << {:name => "#{@first_name} #{@last_name}",:dob => "#{@dob}", :address => "#{@address}", :postcode => "#{@postcode}"}
     end
 end
 
@@ -59,10 +59,27 @@ class Update
     def update
         new_values = {:name => "#{@first_and_last_name}"}
         return Read.new(@input).fetch_contact.merge!(new_values){|key,v1,v2|v2}
-
     end
 end
 
+class Delete
+    def initialize(id,input)
+        @id = id
+        @input = input
+    end
+    def remove_contact
+        if @input == "Y"
+            contact_hash = Read.new(@id).fetch_contact
+            contact_hash.each do |key,value|
+                contact_hash.delete(key)
+                contact_hash.delete(value)
+            end
+        else
+            @input == "N"
+            return ContactsDisplay.new.dummy_contacts
+        end
+    end
+end
 
 class InputOutput
     def initialize(input,output)

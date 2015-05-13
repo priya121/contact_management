@@ -45,4 +45,9 @@ end
     result = Update.new("Erica Simpson",1).update
     expect(result).to include({:name => "Erica Simpson"})
     end
+
+    it "deletes a contact when a user selects Y" do 
+        delete = Delete.new(1,"Y")
+        expect(delete.remove_contact).to eq({})
+    end
 end
