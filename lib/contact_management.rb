@@ -30,7 +30,9 @@ class Read
     def fetch_contact
         contact_id = @input
         if contact_id.is_a?Integer and contact_id != 0
-            return ContactsDisplay.new.dummy_contacts[contact_id -1]
+             ContactsDisplay.new.dummy_contacts[contact_id -1].each do |key,value|
+                 puts "#{key} : #{value}"
+             end
         else 
             return "main page"
         end
@@ -45,7 +47,6 @@ class Create
         @address = address
         @postcode = postcode
     end
-
     def add_contact
         ContactsDisplay.new.dummy_contacts << {:name => "#{@first_name} #{@last_name}",:dob => "#{@dob}", :address => "#{@address}", :postcode => "#{@postcode}"}
     end
