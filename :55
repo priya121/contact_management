@@ -1,6 +1,6 @@
 class ContactsDisplay
     def dummy_contacts
-        contacts = [{:name => "Anna Smith",
+         $contacts = [{:name => "Anna Smith",
             :dob => "10.03.1989", 
             :address => "12 Forlease Road",
             :postcode => "SW9 0LG"},
@@ -19,7 +19,6 @@ class ContactsDisplay
                         :dob => "01.11.1976",
                         :address => "03 Hatton Garden",
                         :postcode => "EC1R 6JP"}] 
-        return contacts
     end
 end
 
@@ -30,7 +29,8 @@ class Read
     def fetch_contact
         contact_id = @input
         if contact_id.is_a?Integer and contact_id != 0
-            return ContactsDisplay.new.dummy_contacts[contact_id -1]
+            $selected_contact =  ContactsDisplay.new.dummy_contacts[contact_id -1]
+            return $selected_contact
         else 
             return "main page"
         end
@@ -47,21 +47,20 @@ class Create
     end
 
     def add_contact
-       ContactsDisplay.new.dummy_contacts << {:name => "#{@first_name} #{@last_name}",:dob => "#{@dob}", :address => "#{@address}", :postcode => "#{@postcode}"}
+        $contacts << {:name => "#{@first_name} #{@last_name}",:dob => "#{@dob}", :address => "#{@address}", :postcode => "#{@postcode}"}
     end
 end
 
 class Update
-    def initialize(first_and_last_name, input)
-        @input = input
+    def initialize(first_and_last_name)
         @first_and_last_name = first_and_last_name
     end
-    def update
-        new_values = {:name => "#{@first_and_last_name}"}
-        return Read.new(@input).fetch_contact.merge!(new_values){|key,v1,v2|v2}
-
-    end
-end
+   def update
+   new_values = {:name => "#{@first_and_last_name}"}
+       return $selected_contact.merge!(new_values){|key,v1,v2|v2}
+       
+   end
+   end
 
 
 class InputOutput
@@ -69,7 +68,7 @@ class InputOutput
         @input = input
         @output = output
     end
-
+    
     def contacts_list
         @output.puts "View a contact:\nWhich contact would you like to view?"
         @output.puts ContactsDisplay.new.dummy_contacts

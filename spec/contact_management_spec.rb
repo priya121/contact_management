@@ -42,8 +42,7 @@ describe "contact management program" do
 end
   
     it "updates a contact with new data when a new field is entered" do 
-    read = Read.new(1).fetch_contact
-    result = Update.new("Erica Simpson").update
+    result = Update.new("Erica Simpson",1).update
     expect(result).to include({:name => "Erica Simpson"})
     end
 end
