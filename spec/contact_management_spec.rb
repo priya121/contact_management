@@ -3,15 +3,14 @@ describe "contact management program" do
     before do 
         @output = StringIO.new
     end
-
     it "shows all the contact details as soon as the page is loaded" do
         display_contacts = ContactsDisplay.new.dummy_contacts
-        expect(display_contacts).to start_with({:name=>"Anna Smith", :dob => "10.03.1989", :address => "12 Forlease Road", :postcode => "SW9 0LG"})
+        expect(display_contacts).to start_with({:first_name=>"Anna", :last_name=>"Smith", :dob=>"10.03.1989", :address=>"12 Forlease Road", :postcode=>"SW9 0LG"})
     end
 
     it "returns the second contact if 2 is entered" do 
         read = Read.new(2)
-        expect(read.fetch_contact).to eq({:name=>"Bob Smith", :dob=> "02.12.1988", :address=> "10 Cedars Road", :postcode=> "KT11 1RY"})
+        expect(read.fetch_contact).to eq({:first_name=>"Bob", :last_name => "Smith", :dob=> "02.12.1988", :address=> "10 Cedars Road", :postcode=> "KT11 1RY"})
     end
 
     it "returns - main page - if a non-integer is entered" do 
@@ -24,7 +23,7 @@ describe "contact management program" do
         @output = StringIO.new
         find_three = InputOutput.new(@input,@output)
         find_three.data_input_output_view
-        expect(@output.string.chomp).to start_with("{:name=>\"Emma Jones\",")
+        expect(@output.string.chomp).to start_with("{:first_name=>\"Emma\",")
     end
 
     it "goes back to main menu when another key is pressed" do 
