@@ -43,32 +43,41 @@ describe "contact management program" do
             expect(@output.string.chomp).to end_with("main page")
         end
     end
-
-    describe Create do
-        describe "#add_contact" do
-            it "adds a new contact, when the relevant details are entered" do 
-                new_contact = Create.new("Sara","Evans","04.11.1988", "35 Guildford Road", "GU22 1EY")
-                result = new_contact.add_contact
-                expect(result).to include({:name => "Sara Evans",:dob => "04.11.1988",:address => "35 Guildford Road", :postcode => "GU22 1EY"})
-            end
+end
+describe Create do
+    describe "#add_contact" do
+        it "adds a new contact, when the relevant details are entered" do 
+            new_contact = Create.new("Sara","Evans","04.11.1988", "35 Guildford Road", "GU22 1EY")
+            result = new_contact.add_contact
+            expect(result).to include({:name => "Sara Evans",:dob => "04.11.1988",:address => "35 Guildford Road", :postcode => "GU22 1EY"})
         end
     end
+end
 
-    describe Update do
-        describe "#update" do 
-            it "updates a contact with new data when a new field is entered" do 
-                result = Update.new("Erica Simpson",1).update
-                expect(result).to include({:name => "Erica Simpson"})
-            end
+describe Update do
+    describe "#update" do 
+        it "updates a contact with new data when a new field is entered" do 
+            result = Update.new("Erica", "Simpson",1).update
+            expect(result).to include({:first_name => "Erica"})
         end
     end
+end
 
-    describe Delete do 
-        describe "#remove_contact" do
-            it "deletes a contact when a user selects Y" do 
-                delete = Delete.new(1,"Y")
-                expect(delete.remove_contact).to eq({})
-            end
+describe Delete do 
+    describe "#remove_contact" do
+        it "deletes a contact when a user selects Y" do 
+            delete = Delete.new(1,"Y")
+            expect(delete.remove_contact).to eq({})
+        end
+    end
+end
+
+
+describe UserMainScreenChoice do 
+    describe "#user_choice" do 
+        it "takes a user to the create a contact page if they enter 1" do 
+        display = UserMainScreenChoice.new(1).user_choice
+        expect(display).to eq("create a contact")
         end
     end
 end
