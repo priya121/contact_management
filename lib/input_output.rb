@@ -10,8 +10,11 @@ class InputOutput
         @screens = screens
     end
 
-    def contacts_list
+    def show
         screen = @screens[0].new(@input, @output)
+        @output.puts "1) " + screen.title
+        choice = @input.gets.to_i - 1
+        screen = @screens[choice].new(@input, @output)
         screen.show
     end
 
@@ -21,7 +24,7 @@ class InputOutput
     end 
 
     def start
-        contacts_list
+        show
         data_input_output_view
     end
 end

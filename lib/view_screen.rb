@@ -7,8 +7,12 @@ class ViewScreen
         @output = output
     end
 
+    def title
+        "View a contact"
+    end
+
     def show
-        @output.puts "View a contact:\nWhich contact would you like to view?"
+        @output.puts "Which contact would you like to view?"
         ContactsDisplay::DUMMY_CONTACTS.each do |key|
             @output.puts "#{key[:first_name]} #{key[:last_name]}"
         end 
