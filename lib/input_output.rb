@@ -2,20 +2,21 @@ require "dummy_contacts_display"
 require "read"
 require "view_screen"
 
+# class MenuChooser
 class InputOutput
-    def initialize(input,output)
+    def initialize(input,output,screens = [ViewScreen])
         @input = input
         @output = output
+        @screens = screens
     end
 
     def contacts_list
-        screen = ViewScreen.new(@input, @output)
+        screen = @screens[0].new(@input, @output)
         screen.show
     end
 
     def data_input_output_view
-        #if @input.gets.to_i.is_a?Integer and @input != 0
-        screen = ViewScreen.new(@input, @output)
+        screen = @screens[0].new(@input, @output)
         screen.perform_action
     end 
 
