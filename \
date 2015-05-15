@@ -1,7 +1,4 @@
 require "dummy_contacts_display"
-require "read"
-require "view_screen"
-
 class InputOutput
     def initialize(input,output)
         @input = input
@@ -9,14 +6,17 @@ class InputOutput
     end
 
     def contacts_list
-        screen = ViewScreen.new(@input, @output)
-        screen.show
+        @output.puts "View a contact:\nWhich contact would you like to view?"
+        ContactsDisplay::DUMMY_CONTACTS.each do |key|
+            @output.puts "#{key[:first_name]} #{key[:last_name]}"
+        end 
     end
 
     def data_input_output_view
         #if @input.gets.to_i.is_a?Integer and @input != 0
-        screen = ViewScreen.new(@input, @output)
-        screen.perform_action
+        @output.puts  Read.new(@input.gets.to_i).fetch_contact
+    else   
+        @output.puts "main page"
     end 
 
     def start
