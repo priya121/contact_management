@@ -8,7 +8,7 @@ class UpdateScreen
     end
 
     def title
-        @output.puts "Update a contact"
+        "Update a contact"
     end
 
 

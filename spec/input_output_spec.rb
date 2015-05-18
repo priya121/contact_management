@@ -11,20 +11,21 @@ describe InputOutput do
         expect(output.string).to include("1) View a contact")
     end
 
-    xit "displays list of screens" do
-        input = StringIO.new("2")
+    it "displays list of screens" do
+        input = StringIO.new("")
         output = StringIO.new("")
-        chooser = InputOutput.new(input, output, [ViewScreen, ScreenDouble])
+        chooser = InputOutput.new(input, output, [CreateScreen,ViewScreen])
         chooser.show
-        expect(output.string).to include("1) View a contact")
-        expect(output.string).to include("2) Test")
+        expect(output.string).to include("1) Create a contact")
+        expect(output.string).to include("2) View a contact")
     end
 
-    it "goes to the correct screen" do
+    it "goes to the correct screen - viewscreen when 2 is entered" do
         input = StringIO.new("2")
         output = StringIO.new("")
-        chooser = InputOutput.new(input, output, [ScreenDouble,ViewScreen])
+        chooser = InputOutput.new(input, output, [ScreenDouble,ViewScreen,ViewScreen])  
         chooser.show
+        expect(output.string.chomp).to include("2) View a contact")
         expect(output.string).to include("Which contact would you like to view?")
     end
 
@@ -33,6 +34,7 @@ describe InputOutput do
         output = StringIO.new("")
         chooser = InputOutput.new(input, output, [CreateScreen,ViewScreen,ScreenDouble])
         chooser.show
+        expect(output.string.chomp).to include("1) Create a contact")
         expect(output.string).to include("Create a contact")
     end
 

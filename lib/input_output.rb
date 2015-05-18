@@ -7,15 +7,14 @@ require "update_screen"
 
 # class MenuChooser
 class InputOutput
-    def initialize(input,output,screens = [CreateScreen,ViewScreen,CreateScreen])
+    def initialize(input,output,screens = [CreateScreen,ViewScreen,UpdateScreen,DeleteScreen])
         @input = input
         @output = output
         @screens = screens
     end
 
     def show
-        screen = @screens[0].new(@input, @output)
-        @output.puts "1) " + screen.title
+        show_screen_titles
         choice = @input.gets.to_i - 1
         screen = @screens[choice].new(@input, @output)
         screen.show
@@ -30,4 +29,16 @@ class InputOutput
         show
         data_input_output_view
     end
+
+    private
+
+    def show_screen_titles
+        @screens.each_with_index do |screen_class,i|
+            screen = screen_class.new(@input, @output)
+            @output.puts "#{i+1}) " + screen.title
+        end
+
+    end
+
+
 end
