@@ -17,7 +17,6 @@ class CreateScreen
     end
 
     def perform_action
-        new_contact =  Create.new(@input).add_contact
-        @output.puts "#{new_contact}"
+        @output.puts Create.new(@input).add_contact
     end
 end

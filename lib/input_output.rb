@@ -1,14 +1,13 @@
 require "dummy_contacts_display"
-require "read"
 require "view_screen"
-require "create"
 require "create_screen"
 require "delete_screen"
+require "update_screen"
 
 
 # class MenuChooser
 class InputOutput
-    def initialize(input,output,screens = [CreateScreen,ViewScreen,ScreenDouble,CreateScreen])
+    def initialize(input,output,screens = [CreateScreen,ViewScreen,CreateScreen])
         @input = input
         @output = output
         @screens = screens

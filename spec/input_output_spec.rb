@@ -41,8 +41,17 @@ describe InputOutput do
         output = StringIO.new("")
         chooser = InputOutput.new(input, output, [CreateScreen,ViewScreen,ScreenDouble,DeleteScreen])
         chooser.show
-        expect(output.string).to include("Enter the number of the contact you would like to delete:")
+        expect(output.string.chomp).to include("Enter the number of the contact you would like to delete:")
     end
+
+    it "goes to the update a contact page if 3 is entered" do 
+        input = StringIO.new("3")
+        output = StringIO.new
+        chooser = InputOutput.new(input, output, [CreateScreen,ViewScreen,UpdateScreen,DeleteScreen])
+        chooser.show
+        expect(output.string.chomp).to include("Enter the details of any changes you would like to make:")
+    end
+    
     class ScreenDouble
         def initialize(input, output)
             @input = input
@@ -60,6 +69,5 @@ describe InputOutput do
     
     
 
+
 end
-
-
