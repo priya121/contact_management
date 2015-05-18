@@ -3,6 +3,8 @@ require "read"
 require "view_screen"
 require "create"
 require "create_screen"
+require "delete_screen"
+
 
 # class MenuChooser
 class InputOutput

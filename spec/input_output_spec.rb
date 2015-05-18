@@ -36,7 +36,13 @@ describe InputOutput do
         expect(output.string).to include("Create a contact")
     end
 
-
+    it "goes to the delete a contact page if 4 is entered" do 
+        input = StringIO.new("4")
+        output = StringIO.new("")
+        chooser = InputOutput.new(input, output, [CreateScreen,ViewScreen,ScreenDouble,DeleteScreen])
+        chooser.show
+        expect(output.string).to include("Enter the number of the contact you would like to delete:")
+    end
     class ScreenDouble
         def initialize(input, output)
             @input = input

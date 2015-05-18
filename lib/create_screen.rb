@@ -14,12 +14,10 @@ class CreateScreen
 
     def show
         @output.puts "Enter the relevant fields"
-        ContactsDisplay::DUMMY_CONTACTS << {:name => "#{@first_name} #{@last_name}",:dob => "#{@dob}", :address => "#{@address}", :postcode => "#{@postcode}"}
     end
 
     def perform_action
-        new_contact =  Create.new("Sara","Evans","04.11.1988", "35 Guildford Road", "GU22 1EY")
+        new_contact =  Create.new(@input).add_contact
         @output.puts "#{new_contact}"
     end
-
 end
