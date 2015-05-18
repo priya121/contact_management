@@ -12,7 +12,7 @@ describe InputOutput do
     end
 
     xit "displays list of screens" do
-        input = StringIO.new("1")
+        input = StringIO.new("2")
         output = StringIO.new("")
         chooser = InputOutput.new(input, output, [ViewScreen, ScreenDouble])
         chooser.show
@@ -21,18 +21,17 @@ describe InputOutput do
     end
 
     it "goes to the correct screen" do
-        input = StringIO.new("2")
+        input = StringIO.new("1")
         output = StringIO.new("")
-        chooser = InputOutput.new(input, output, [ViewScreen,ScreenDouble])
+        chooser = InputOutput.new(input, output, [CreateScreen,ViewScreen,ScreenDouble])
         chooser.show
-        expect(output.string).to include("This is a test screen")
+        expect(output.string).to include("Create a contact")
     end
 
     class ScreenDouble
         def initialize(input, output)
             @input = input
             @output = output
-
         end
 
         def title
@@ -43,6 +42,9 @@ describe InputOutput do
             @output.puts "This is a test screen"
         end
     end
+    
+    
+
 end
 
 
