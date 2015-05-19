@@ -15,19 +15,22 @@ class InputOutput
 
     def show
         show_screen_titles
-        choice = @input.gets.to_i - 1
-        screen = @screens[choice].new(@input, @output)
+        @choice = @input.gets.to_i - 1
+        screen = @screens[@choice].new(@input, @output)
         screen.show
     end
 
-    def data_input_output_view
-        screen = @screens[0].new(@input, @output)
-        screen.perform_action
-    end 
+    #def perform_action 
+        #@screen = @screens[@choice].new(@input,@output)
+        #@screen.perform_action
+    #end 
 
     def start
         show
-        data_input_output_view
+        @output.puts "Would you like to exit?"
+        if @input.gets.chomp == "Y"
+            return true
+    end
     end
 
     private
