@@ -6,8 +6,8 @@ describe ViewScreen do
             @input = StringIO.new("3")
             @output = StringIO.new
             find_three = ViewScreen.new(@input,@output)
-            find_three.perform_action
-            expect(@output.string.chomp).to start_with("{:first_name=>\"Emma\",")
+            find_three.show
+            expect(@output.string.chomp).to include("{:first_name=>\"Emma\",")
         end
     end
 end

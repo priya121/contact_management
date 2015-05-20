@@ -23,7 +23,7 @@ describe InputOutput do
     it "goes to the correct screen - viewscreen when 2 is entered" do
         input = StringIO.new("2")
         output = StringIO.new("")
-        chooser = InputOutput.new(input, output, [ScreenDouble,ViewScreen,ViewScreen])  
+        chooser = InputOutput.new(input, output, [ViewScreen,ViewScreen])  
         chooser.show
         expect(output.string.chomp).to include("2) View a contact")
         expect(output.string).to include("Which contact would you like to view?")

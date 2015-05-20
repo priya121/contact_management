@@ -14,10 +14,18 @@ class UpdateScreen
 
     def show 
         @output.puts "Enter the details of any changes you would like to make:"
-    end
+        @output.puts "Choose a contact to Update #{ContactsDisplay::DUMMY_CONTACTS}"
+        id_number = @input.gets
+        old_name = ContactsDisplay::DUMMY_CONTACTS[id_number.to_i][:first_name]
+        @output.puts "Current Name: #{old_name}"
+        @output.puts "New First Name (leave blank to keep):"
+        first_name = @input.gets
+        if first_name == "\n"
+            first_name = "#{old_name}" 
+        end
+       @output.puts "New Last Name (leave blank to keep):"
+        last_name = @input.gets
+        @output.puts "#{Update.new(first_name,last_name,id_number).update}"
 
-    def perform_action 
-       @output.puts Update.new(@input).update 
     end
-
 end

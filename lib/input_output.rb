@@ -29,6 +29,8 @@ class InputOutput
         show
         @output.puts "Would you like to exit?"
         if @input.gets.chomp == "Y"
+            @output.puts "Exiting game"
+        else 
             return true
     end
     end
@@ -36,10 +38,12 @@ class InputOutput
     private
 
     def show_screen_titles
+        @output.puts "What would you like to do?\n"
         @screens.each_with_index do |screen_class,i|
             screen = screen_class.new(@input, @output)
             @output.puts "#{i+1}) " + screen.title
         end
+        @output.puts "\nEnter your choice:"
 
     end
 

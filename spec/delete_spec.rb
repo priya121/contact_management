@@ -1,5 +1,4 @@
 require "delete"
-
     describe Delete do 
         describe "#remove_contact" do
             it "deletes a contact when a user selects Y" do 
