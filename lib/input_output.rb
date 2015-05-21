@@ -17,7 +17,7 @@ class InputOutput
     def show
         show_screen_titles
         @choice = @input.gets.to_i - 1
-        screen = @screens[@choice].new(@input, @output)
+        screen = @screens[@choice].new(@contacts,@input, @output)
         screen.show
     end
 
@@ -37,7 +37,7 @@ class InputOutput
         @output.puts "What would you like to do?"
         @output.puts
         @screens.each_with_index do |screen_class,i|
-            screen = screen_class.new(@input, @output)
+            screen = screen_class.new(@contacts,@input, @output)
             @output.puts "#{i+1}) " + screen.title
         end
         @output.puts "\nEnter your choice:"

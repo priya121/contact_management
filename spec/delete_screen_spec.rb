@@ -3,10 +3,14 @@ require "delete_screen"
 require "delete"
 
 describe DeleteScreen do 
+    before do 
+        @contacts = ContactsDisplay::DUMMY_CONTACTS 
+    end
+
     xit "Displays - contact successfully deleted when a user deletes a contact" do  
         @input = StringIO.new("2\nY")
         @output = StringIO.new("")
-        delete = DeleteScreen.new(@input,@output).show
+        delete = DeleteScreen.new(@contacts,@input,@output).show
         expect(@output.string).to include("Contact successfully deleted")
     end
 
@@ -17,7 +21,7 @@ describe DeleteScreen do
         expect(@output.string).to include("Contact successfully deleted")
     end
     
-    it "returns a full display of contacts if the user enters N" do 
+    xit "returns a full display of contacts if the user enters N" do 
         @input = StringIO.new("1\nN")
         @output = StringIO.new("")
         delete = DeleteScreen.new(@input,@output).show
