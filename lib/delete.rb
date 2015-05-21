@@ -1,12 +1,10 @@
 class Delete
-    def initialize(id)
+    def initialize(contact_hash,id)
+        @contact_hash = contact_hash 
         @id = id
     end
+
     def remove_contact
-        contact_hash.each do |key,value|
-            contact_hash.delete(key)
-            contact_hash.delete(value)
-        end
-        return contact_hash
+         @contact_hash.delete_at(@id-1)
     end
 end

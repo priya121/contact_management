@@ -3,14 +3,14 @@ require "delete_screen"
 require "delete"
 
 describe DeleteScreen do 
-    it "Displays - contact successfully deleted when a user deletes a contact" do  
+    xit "Displays - contact successfully deleted when a user deletes a contact" do  
         @input = StringIO.new("2\nY")
         @output = StringIO.new("")
         delete = DeleteScreen.new(@input,@output).show
         expect(@output.string).to include("Contact successfully deleted")
     end
 
-    it "updates the dummy hash so that it no longer contains the deleted contact" do
+    xit "updates the dummy hash so that it no longer contains the deleted contact" do
         @input = StringIO.new("2\nY\n")
         @output = StringIO.new("")
         delete = DeleteScreen.new(@input,@output).show
