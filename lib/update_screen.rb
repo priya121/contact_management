@@ -2,7 +2,8 @@ require "dummy_contacts_display"
 require "update"
 
 class UpdateScreen
-    def initialize(input, output)
+    def initialize(contacts,input, output)
+        @contacts = contacts
         @input = input
         @output = output
     end
@@ -25,7 +26,6 @@ class UpdateScreen
         end
        @output.puts "New Last Name (leave blank to keep):"
         last_name = @input.gets
-        @output.puts "#{Update.new(first_name,last_name,id_number).update}"
-
+        @output.puts "#{Update.new(@contacts,first_name,last_name,id_number).update}"
     end
 end
