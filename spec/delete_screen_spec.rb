@@ -1,11 +1,26 @@
+require "dummy_contacts_display"
 require "delete_screen"
 require "delete"
 
 describe DeleteScreen do 
-    it "Deletes a contact when a user chooses the contact by entering the id of that contact" do  
-        @input = StringIO.new("2")
+    it "Displays - contact successfully deleted when a user deletes a contact" do  
+        @input = StringIO.new("2\nY")
         @output = StringIO.new("")
-        delete = DeleteScreen.new(@input,@output)
-        expect(@output.string).to include("{}")
+        delete = DeleteScreen.new(@input,@output).show
+        expect(@output.string).to include("Contact successfully deleted")
+    end
+
+    it "updates the dummy hash so that it no longer contains the deleted contact" do
+        @input = StringIO.new("2\nY\n")
+        @output = StringIO.new("")
+        delete = DeleteScreen.new(@input,@output).show
+        expect(@output.string).to include("Contact successfully deleted")
+    end
+    
+    it "returns a full display of contacts if the user enters N" do 
+        @input = StringIO.new("1\nN")
+        @output = StringIO.new("")
+        delete = DeleteScreen.new(@input,@output).show
+        expect(@output.string).to eq("Enter the number of the contact you would like to delete:\nAre you sure you want to delete this contact?\n#{ContactsDisplay::DUMMY_CONTACTS}\n")
     end
 end

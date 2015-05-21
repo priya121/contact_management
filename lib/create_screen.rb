@@ -13,15 +13,16 @@ class CreateScreen
     end
 
     def show
-        @output.puts "Enter the fields you would like to change:\nFirst name:"
+        @output.print "Enter the fields you would like to change:"
+       @output.print "First name:"
         @first_name = @input.gets 
-        @output.puts "Last name:"
+        @output.print "Last name:"
         @last_name = @last_name = @input.gets
-        @output.puts "dob:"
+        @output.print "dob:"
         @dob = @input.gets
-        @output.puts "Address:"
+        @output.print "Address:"
         @address = @input.gets
-        @output.puts "Postcode:"
+        @output.print "Postcode:"
         @postcode = @input.gets
 
         @add_contact = Create.new(@first_name,@last_name,@dob,@address,@postcode).add_contact

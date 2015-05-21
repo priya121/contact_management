@@ -20,25 +20,21 @@ class InputOutput
         screen.show
     end
 
-    #def perform_action 
-        #@screen = @screens[@choice].new(@input,@output)
-        #@screen.perform_action
-    #end 
-
     def start
         show
         @output.puts "Would you like to exit?"
         if @input.gets.chomp == "Y"
-            @output.puts "Exiting game"
+            @output.puts "Exiting"
         else 
-            return true
+            start
     end
     end
 
     private
 
     def show_screen_titles
-        @output.puts "What would you like to do?\n"
+        @output.puts "What would you like to do?"
+        @output.puts
         @screens.each_with_index do |screen_class,i|
             screen = screen_class.new(@input, @output)
             @output.puts "#{i+1}) " + screen.title
