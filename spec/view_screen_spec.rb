@@ -1,7 +1,7 @@
 require "view_screen"
 
 describe ViewScreen do  
-    describe "#perform_action" do
+    describe "#show" do
         before do 
             @contacts = ContactsDisplay::DUMMY_CONTACTS
         end
