@@ -3,7 +3,8 @@ require "read"
 
 class ViewScreen
 
-    def initialize(input, output)
+    def initialize(contacts,input, output)
+        @contacts = contacts
         @input = input
         @output = output
     end
@@ -14,11 +15,10 @@ class ViewScreen
 
     def show
         @output.puts "Which contact would you like to view?"
-        contacts = ContactsDisplay::DUMMY_CONTACTS
-        contacts.each_with_index do |key,i|
+        @contacts.each_with_index do |key,i|
             @output.puts "#{i+1}) #{key[:first_name]} #{key[:last_name]}"
         end 
-        display =  Read.new(@input.gets.to_i).fetch_contact
+        display =  Read.new(@contacts,@input.gets.to_i).fetch_contact
         @output.puts "#{display}"
     end
 end
