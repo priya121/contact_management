@@ -7,6 +7,7 @@ require "update_screen"
 
 # class MenuChooser
 class InputOutput
+    
     def initialize(input,output,screens = [CreateScreen,ViewScreen,UpdateScreen,DeleteScreen])
         @input = input
         @output = output

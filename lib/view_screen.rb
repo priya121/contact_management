@@ -14,7 +14,8 @@ class ViewScreen
 
     def show
         @output.puts "Which contact would you like to view?"
-        ContactsDisplay::DUMMY_CONTACTS.each_with_index do |key,i|
+        contacts = ContactsDisplay::DUMMY_CONTACTS
+        contacts.each_with_index do |key,i|
             @output.puts "#{i+1}) #{key[:first_name]} #{key[:last_name]}"
         end 
         display =  Read.new(@input.gets.to_i).fetch_contact
