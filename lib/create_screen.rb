@@ -3,7 +3,8 @@ require "create"
 
 class CreateScreen
 
-    def initialize(input,output)
+    def initialize(contacts,input,output)
+        @contacts = contacts
         @input = input
         @output = output
     end

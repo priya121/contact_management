@@ -1,5 +1,6 @@
 require "dummy_contacts_display"
 require "read"
+require "contact_chooser"
 
 class ViewScreen
 
@@ -15,11 +16,9 @@ class ViewScreen
 
     def show
         @output.puts "Which contact would you like to view?"
-        @contacts.each_with_index do |key,i|
-            @output.puts "#{i+1}) #{key[:first_name]} #{key[:last_name]}"
-        end 
-        display =  Read.new(@contacts,@input.gets.to_i).fetch_contact
-        @output.puts "#{display}"
+         contacts_list = ContactChooser.new(@contacts,@input,@output).show_contacts_list
+        index = ContactChooser.new(@contacts,@input,@output).contact_chosen
+   @output.puts contacts_list[index.to_i]
     end
 end
 

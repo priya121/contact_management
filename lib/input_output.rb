@@ -7,7 +7,6 @@ require "update_screen"
 
 # class MenuChooser
 class InputOutput
-    
     def initialize(input,output,screens = [CreateScreen,ViewScreen,UpdateScreen,DeleteScreen])
         @input = input
         @output = output
@@ -17,7 +16,7 @@ class InputOutput
     def show
         show_screen_titles
         @choice = @input.gets.to_i - 1
-        screen = @screens[@choice].new(@contacts,@input, @output)
+        screen = @screens[@choice].new(@contacts,@input,@output)
         screen.show
     end
 
@@ -28,14 +27,13 @@ class InputOutput
             @output.puts "Exiting"
         else 
             start
-    end
+        end
     end
 
     private
 
     def show_screen_titles
         @output.puts "What would you like to do?"
-        @output.puts
         @screens.each_with_index do |screen_class,i|
             screen = screen_class.new(@contacts,@input, @output)
             @output.puts "#{i+1}) " + screen.title

@@ -8,14 +8,17 @@ class ContactChooser
         @output = output
     end
 
-    def user_chooses_contact
-        @output.puts "Which contact would you like to view?"
+    def show_contacts_list
+        @contacts = ContactsDisplay::DUMMY_CONTACTS
         @contacts.each_with_index do |key,i|
             @output.puts "#{i+1}) #{key[:first_name]} #{key[:last_name]}"
         end 
-        contact_chosen = @input.gets.to_i-1
-        #display =  Read.new(@contacts,contact_chosen).fetch_contact
-        puts contact_chosen
+    end
+
+    def contact_chosen 
+        contact = @input.gets.to_i-1
+       #display =  Read.new(@contacts,contact_chosen).fetch_contact
+        @output.puts contact
     end
 end
 

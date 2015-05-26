@@ -1,4 +1,5 @@
 require "dummy_contacts_display"
+require "read"
 
 class Update
     def initialize(contacts,first_name,last_name,id_number)
