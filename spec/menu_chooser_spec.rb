@@ -1,6 +1,8 @@
-require "input_output"
+require "menu_chooser"
+require "contact_chooser"
+require "view_screen"
 
-describe InputOutput do  
+describe MenuChooser do  
 before do 
 @contacts = ContactsDisplay::DUMMY_CONTACTS
 end
@@ -8,7 +10,7 @@ end
     it "displays first screen" do
         input = StringIO.new("2")
         output = StringIO.new("")
-        chooser = InputOutput.new(input, output, [ViewScreen,ViewScreen])
+        chooser = MenuChooser.new(@contacts,input,output, [ViewScreen,ViewScreen])
         chooser.show
         expect(output.string).to include("1) View a contact")
     end
@@ -16,7 +18,7 @@ end
     it "displays list of screens" do
         input = StringIO.new("")
         output = StringIO.new("")
-        chooser = InputOutput.new(input, output, [CreateScreen,ViewScreen])
+        chooser = MenuChooser.new(@contacts,input, output, [CreateScreen,ViewScreen])
         chooser.show
         expect(output.string).to include("1) Create a contact")
         expect(output.string).to include("2) View a contact")
@@ -25,7 +27,7 @@ end
     it "goes to the correct screen - viewscreen when 2 is entered" do
         input = StringIO.new("2")
         output = StringIO.new("")
-        chooser = InputOutput.new(input, output, [ViewScreen,ViewScreen])  
+        chooser = MenuChooser.new(@contacts,input, output, [ViewScreen,ViewScreen])  
         chooser.show
         expect(output.string.chomp).to include("2) View a contact")
         expect(output.string).to include("Which contact would you like to view?")
@@ -34,7 +36,7 @@ end
     it "goes to the create a contact page if 1 is entered" do
         input = StringIO.new("1")
         output = StringIO.new("")
-        chooser = InputOutput.new(input, output, [CreateScreen,ViewScreen,ScreenDouble])
+        chooser = MenuChooser.new(@contacts,input, output, [CreateScreen,ViewScreen,ScreenDouble])
         chooser.show
         expect(output.string.chomp).to include("1) Create a contact")
         expect(output.string).to include("Create a contact")
@@ -43,15 +45,15 @@ end
     it "goes to the delete a contact page if 4 is entered" do 
         input = StringIO.new("4")
         output = StringIO.new("")
-        chooser = InputOutput.new(input, output, [CreateScreen,ViewScreen,ScreenDouble,DeleteScreen])
+        chooser = MenuChooser.new(@contacts,input, output, [CreateScreen,ViewScreen,ScreenDouble,DeleteScreen])
         chooser.show
         expect(output.string.chomp).to include("Enter the number of the contact you would like to delete:")
     end
 
-    xit "goes to the update a contact page if 3 is entered" do 
+   it "goes to the update a contact page if 3 is entered" do 
         input = StringIO.new("3")
         output = StringIO.new
-        chooser = InputOutput.new(input, output, [CreateScreen,ViewScreen,UpdateScreen,DeleteScreen])
+        chooser = MenuChooser.new(@contacts,input, output, [CreateScreen,ViewScreen,UpdateScreen,DeleteScreen])
         chooser.show
         expect(output.string.chomp).to include("Enter the details of any changes you would like to make:")
     end

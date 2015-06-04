@@ -1,10 +1,12 @@
 class Delete
-    def initialize(contact_hash,id)
-        @contact_hash = contact_hash 
-        @id = id
+    def initialize(contacts,input,output)
+        @contacts = contacts
+        @input = input
+        @output = output
     end
 
     def remove_contact
-         @contact_hash.delete_at(@id-1)
+        deleted_contact = ContactChooser.new(@contacts,@input,@output).contact_chosen
+         @contacts.delete_at(deleted_contact)
     end
 end

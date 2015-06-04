@@ -7,7 +7,7 @@ describe UpdateScreen  do
         @contacts = ContactsDisplay::DUMMY_CONTACTS
     end
 
-    xit "updates a dummy contact display with the new details a user enters" do 
+    it "updates a dummy contact display with the new details a user enters" do 
         input = StringIO.new("3\nAlex\nJones")
         output = StringIO.new("")
         UpdateScreen.new(@contacts,input,output).show

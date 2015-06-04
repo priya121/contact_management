@@ -15,10 +15,9 @@ describe ContactChooser do
 
     it "takes an input from the user and returns the relevant contact index" do 
         input = StringIO.new("1")
-        output = StringIO.new("")
         chooser = ContactChooser.new(@contacts,input,output)
         result = chooser.contact_chosen
-        expect(output.string).to start_with("0")
+        expect(result).to eq(0)
     end
 end
 

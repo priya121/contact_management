@@ -11,7 +11,7 @@ describe ViewScreen do
             @output = StringIO.new("")
             find_three = ViewScreen.new(@contacts,@input,@output).show
             
-            expect(@output.string).to include("Anna\",")
+            expect(@output.string).to include("Anna")
         end
     end
 end

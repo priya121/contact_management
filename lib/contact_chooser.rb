@@ -1,5 +1,5 @@
 require "dummy_contacts_display"
-require "input_output"
+require "menu_chooser"
 
 class ContactChooser
     def initialize(contacts,input,output)
@@ -16,9 +16,7 @@ class ContactChooser
     end
 
     def contact_chosen 
-        contact = @input.gets.to_i-1
-       #display =  Read.new(@contacts,contact_chosen).fetch_contact
-        @output.puts contact
+        return @input.gets.to_i - 1
     end
 end
 

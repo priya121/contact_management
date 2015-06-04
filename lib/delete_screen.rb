@@ -16,17 +16,16 @@ class DeleteScreen
     def show 
         @output.puts "Enter the number of the contact you would like to delete:"
         list = ContactChooser.new(@contacts,@input,@output).show_contacts_list
-        @output.puts "#{list}"
-        id = @input.gets.to_i
+        chosen_id = ContactChooser.new(@contacts,@input,@output).contact_chosen
         @output.puts "Are you sure you want to delete this contact?"
         confirmation = @input.gets
         if confirmation == "Y"
-        deleted_contact = Delete.new(@contacts,id).remove_contact
+        deleted_contact = Delete.new(@contacts,chosen_id,@output).remove_contact
         @output.puts deleted_contact
            @output.puts "Contact successfully deleted" 
         else
             @input.gets == "N"
-            @output.puts "#{ContactsDisplay::DUMMY_CONTACTS}"
+            @output.puts @contacts
         end
     end
 

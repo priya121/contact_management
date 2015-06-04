@@ -16,9 +16,14 @@ class ViewScreen
 
     def show
         @output.puts "Which contact would you like to view?"
-         contacts_list = ContactChooser.new(@contacts,@input,@output).show_contacts_list
+        contacts_list = ContactChooser.new(@contacts,@input,@output).show_contacts_list
         index = ContactChooser.new(@contacts,@input,@output).contact_chosen
-   @output.puts contacts_list[index.to_i]
+        #@contacts.each_with_index do |key,i|
+            @output.puts "First Name: #{contacts_list[index.to_i][:first_name]}"
+            @output.puts "Last Name: #{contacts_list[index.to_i][:last_name]}"
+            @output.puts "D.O.B (dd.mm/yyyy): #{contacts_list[index.to_i][:dob]}"
+            @output.puts "Address: #{contacts_list[index.to_i][:address]}"
+            @output.puts "Postcode: #{contacts_list[index.to_i][:postcode]}"
+        end
     end
-end
 

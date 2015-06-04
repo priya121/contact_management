@@ -1,0 +1,23 @@
+require "json"
+require "contact_persister"
+require "dummy_contacts_display"
+require "tempfile"
+
+describe ContactPersister do
+    let (:db) {create_db}
+    let (:file) {Tempfile.new('db')}
+    describe "#load" do
+        it "loads all data" do
+            persister = ContactPersister.new(db)
+            contacts = persister.load
+            expect(contacts).to eq(ContactsDisplay::DUMMY_CONTACTS)
+        end
+    end
+
+    def create_db
+       file = Tempfile.new('db') 
+       json = ContactsDisplay::DUMMY_CONTACTS.to_json
+       file.write(json)
+       return file.path
+    end
+end

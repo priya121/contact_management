@@ -4,10 +4,9 @@ require "create_screen"
 require "delete_screen"
 require "update_screen"
 
-
-# class MenuChooser
-class InputOutput
-    def initialize(input,output,screens = [CreateScreen,ViewScreen,UpdateScreen,DeleteScreen])
+class MenuChooser
+    def initialize(contacts,input,output,screens = [CreateScreen,ViewScreen,UpdateScreen,DeleteScreen])
+        @contacts = contacts
         @input = input
         @output = output
         @screens = screens
@@ -41,6 +40,4 @@ class InputOutput
         @output.puts "\nEnter your choice:"
 
     end
-
-
 end

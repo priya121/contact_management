@@ -1,5 +1,0 @@
-#! usr/bin/env ruby 
-
-$LOAD_PATH.unshift File.dirname(__FILE__) + '/../lib'
-require "input_output"
-InputOutput.new(Kernel,Kernel).start

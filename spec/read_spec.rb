@@ -1,4 +1,5 @@
 require "read"
+
 describe Read do
     before do
         @contacts = ContactsDisplay::DUMMY_CONTACTS

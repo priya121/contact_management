@@ -8,14 +8,14 @@ describe DeleteScreen do
     end
 
     it "Displays - contact successfully deleted when a user deletes a contact" do  
-        @input = StringIO.new("5\nY")
+        @input = StringIO.new("1\nY\n")
         @output = StringIO.new("")
         delete = DeleteScreen.new(@contacts,@input,@output).show
         expect(@output.string).to include("Contact successfully deleted")
     end
 
     it "updates the dummy hash so that it no longer contains the deleted contact" do
-        @input = StringIO.new("4\nY")
+        @input = StringIO.new("4\nY\n")
         @output = StringIO.new("")
         delete = DeleteScreen.new(@contacts,@input,@output).show
         expect(@output.string).to include("Contact successfully deleted")
