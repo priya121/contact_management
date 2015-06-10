@@ -28,7 +28,7 @@ class CreateScreen
 
         @add_contact = Create.new(@first_name,@last_name,@dob,@address,@postcode).add_contact
 
-        added_entry = ContactsDisplay::DUMMY_CONTACTS
+        added_entry = @contacts
         @output.puts "First Name: #{added_entry[@add_contact.length - 1][:first_name]}"
         @output.puts "Last Name: #{added_entry[@add_contact.length - 1][:last_name]}"
         @output.puts "DOB (dd.mm.yyyy): #{added_entry[@add_contact.length - 1][:dob]}"

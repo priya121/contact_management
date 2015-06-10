@@ -1,15 +1,16 @@
 require "json"
 
 class ContactPersister    
-    
-   def initialize(db)
-       @db = db
-   end
+
+    def initialize(db)
+        @db = db
+    end
 
     def load
         file = File.new(@db)
         json = file.read
-        return JSON.parse(json,{:symbolize_names => true})
+        data = JSON.parse(json,{:symbolize_names => true})
+        return data
     end
 
     def save(contacts)
@@ -18,3 +19,4 @@ class ContactPersister
         file.close
     end
 end
+

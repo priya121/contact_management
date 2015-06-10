@@ -18,7 +18,7 @@ class UpdateScreen
         list = ContactChooser.new(@contacts,@input,@output).show_contacts_list
         chosen_id = ContactChooser.new(@contacts,@input,@output).contact_chosen
         @output.puts "Enter the details of any changes you would like to make:"
-        contacts_hash = ContactsDisplay::DUMMY_CONTACTS
+        contacts_hash = @contacts 
         old_first_name = contacts_hash[chosen_id.to_i][:first_name]
         @output.puts "Current First Name: #{old_first_name}"
         @output.puts "New First Name (leave blank to keep):"
