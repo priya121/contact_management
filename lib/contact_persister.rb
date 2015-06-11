@@ -9,7 +9,7 @@ class ContactPersister
     def load
         file = File.new(@db)
         json = file.read
-        data = JSON.parse(json,{:symbolize_names => true})
+        data = JSON.parse(json, {symbolize_names: true})
         return data
     end
 

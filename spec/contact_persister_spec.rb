@@ -33,4 +33,3 @@ describe ContactPersister do
         return file.path
     end
 end
-

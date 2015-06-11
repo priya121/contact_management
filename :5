@@ -1,9 +1,0 @@
-#! usr/bin/env ruby 
-
-$LOAD_PATH.unshift File.dirname(__FILE__) + '/../lib'
-require "menu_chooser"
-
-require "contact_persister"
-@contacts = ContactPersister.new('~/.con_man/db').load
-MenuChooser.new(@contacts,Kernel,Kernel).start
-puts "\e[H\e[2J"

@@ -4,7 +4,7 @@ require "contact_chooser"
 describe ViewScreen do  
     describe "#show" do
         before do 
-            @contacts = ContactsDisplay::DUMMY_CONTACTS
+        @contacts=  ContactPersister.new('/Users/priya10487/.con_man/db.rb').load
         end
         it "shows contact details of Anna Smith when key 1 is pressed" do 
             @input = StringIO.new("1\n")

@@ -6,10 +6,6 @@ require "view_screen"
 require "contact_persister"
 
 describe MenuChooser do  
-    before do 
-        @contact_persister  = ContactPersister.new('/Users/priya10487/.con_man/db1.rb')
-    end
-
     it "displays first screen" do
         input = StringIO.new("2")
         output = StringIO.new("")
@@ -37,10 +33,11 @@ describe MenuChooser do
     end
 
     it "goes to the create a contact page if 1 is entered" do
-        input = StringIO.new("1\nEmma\nSampson\n04.10.1988\n127 Bren Road\n KT17 7LM")
+        input = StringIO.new("1\nSarah\nSmith\n04.10.1987\n12 cedar way\nKT78 0YH")
         output = StringIO.new("")
-        chooser = MenuChooser.new(@contact_persister,input, output, [CreateScreen,CreateScreen,ViewScreen,ScreenDouble])
-        expect(output.string).to include("Enter the fields you would like to change")
+        chooser = MenuChooser.new(@contacts_persister,input, output, [CreateScreen,CreateScreen,ViewScreen,ScreenDouble])
+        chooser.show
+        expect(output.string).to include("Create a contact")
     end
 
     it "goes to the delete a contact page if 4 is entered" do 
@@ -54,12 +51,12 @@ describe MenuChooser do
     it "goes to the update a contact page if 3 is entered" do 
         input = StringIO.new("3")
         output = StringIO.new
-        chooser = MenuChooser.new(@contact_persister,input, output, [CreateScreen,ViewScreen,UpdateScreen,DeleteScreen])
+        chooser = MenuChooser.new(@contacts_persister,input, output, [CreateScreen,ViewScreen,UpdateScreen,DeleteScreen])
         chooser.show
         expect(output.string.chomp).to include("Enter the details of any changes you would like to make:")
     end
 
-    xit "loads a file" do
+    it "loads a file" do
         contact_persister_double = instance_double("ContactPersister", :load => ContactsDisplay::DUMMY_CONTACTS)
         input = StringIO.new("2")
         output = StringIO.new
@@ -69,7 +66,7 @@ describe MenuChooser do
         expect(output.string).to include("Anna")
     end
 
-    xit "saves to a file" do
+    it "saves to a file" do
         contact_persister_double = instance_double("ContactPersister")
         input = StringIO.new("3")
         output = StringIO.new
@@ -101,8 +98,8 @@ describe MenuChooser do
             json = ContactsDisplay::DUMMY_CONTACTS.to_json
         end
 
-        def save
-
+        def save(contacts)
+            "Sarah"
         end
     end
 end
