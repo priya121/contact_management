@@ -7,12 +7,6 @@ describe MenuChooser do
     let(:persister) {double().as_null_object}
     let(:contacts) {double().as_null_object}
 
-        it "displays first screen" do
-            input = StringIO.new("2")
-            chooser(input).show
-            expect(output.string).to include("2) View a contact")
-        end
-
         it "displays list of screens" do
             input = StringIO.new("")
             chooser(input).show
@@ -45,7 +39,6 @@ describe MenuChooser do
 
         it "saves to a file" do
             contact_persister_double = instance_double("ContactPersister")
-            input = StringIO.new("3")
             saved_contacts = {:first_name => "Samuel", :last_name =>"Ann"}
             saved_contacts_file = ContactPersisterDouble.new.save(saved_contacts)
             expect(saved_contacts_file).to include("Samuel")
