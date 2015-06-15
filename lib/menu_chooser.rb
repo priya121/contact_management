@@ -4,7 +4,8 @@ require "update_screen"
 require "view_screen"
 
 class MenuChooser
-    def initialize(contact_persister,input,output,screens = [CreateScreen,ViewScreen,UpdateScreen,DeleteScreen])
+    def initialize(contacts,contact_persister,input,output,screens = [CreateScreen,ViewScreen,UpdateScreen,DeleteScreen])
+        @contacts = contacts
         @contact_persister = contact_persister
         @input = input
         @output = output
@@ -18,13 +19,15 @@ class MenuChooser
         screen.show
     end
 
-
     def start
-        begin
-            show
-            @output.puts "Would you like to exit?"
-        end until  @input.gets.chomp == "Y"
-        @output.puts "Exiting"
+        @contacts = @contacts.load
+        @output.puts "Would you like to exit?"
+        if @input.gets.chomp == "Y"
+            @output.puts "Exiting"
+        else 
+            start
+        end
+        @contacts.persister.save(@contacts)
     end
 
     private
