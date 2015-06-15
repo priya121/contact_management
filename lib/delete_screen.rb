@@ -1,4 +1,5 @@
-require "dummy_contacts_display"
+require "contact_persister"
+require "contact_chooser"
 require "delete"
 
 class DeleteScreen
@@ -17,9 +18,11 @@ class DeleteScreen
         @output.puts "Enter the number of the contact you would like to delete:"
         list = ContactChooser.new(@contacts,@input,@output).show_contacts_list
         chosen_id = ContactChooser.new(@contacts,@input,@output).contact_chosen
+        puts chosen_id
         @output.puts "Are you sure you want to delete this contact?"
         confirmation = @input.gets
-        if confirmation == "Y"
+        puts confirmation
+        if confirmation == "Y\nY"
         deleted_contact = Delete.new(@contacts,chosen_id,@output).remove_contact
         @output.puts deleted_contact
            @output.puts "Contact successfully deleted" 
@@ -28,7 +31,5 @@ class DeleteScreen
             @output.puts @contacts
         end
     end
-
-
 end
 

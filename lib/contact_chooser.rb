@@ -9,7 +9,6 @@ class ContactChooser
     end
 
     def show_contacts_list
-       @contacts = ContactsDisplay::DUMMY_CONTACTS
         @contacts.each_with_index do |key,i|
             @output.puts "#{i+1}) #{key[:first_name]} #{key[:last_name]}"
         end 

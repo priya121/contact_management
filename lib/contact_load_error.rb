@@ -1,0 +1,1 @@
+class ContactLoadError < StandardError; end

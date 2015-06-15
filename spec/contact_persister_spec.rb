@@ -1,35 +1,33 @@
 require "json"
 require "contact_persister"
-require "dummy_contacts_display"
 require "tempfile"
 
 describe ContactPersister do
+    let(:contacts)  {{a: 'b'}}
+    let(:file)      {Tempfile.new('db')}
+    let(:persister) {described_class.new(file.path)}
+
+    def create_db(file)
+        file.write(contacts.to_json)
+        file.close 
+    end
 
     describe "#load" do
         it "loads all data" do
-            file = Tempfile.new('db')
             create_db(file)
-            persister = ContactPersister.new(file.path)
-            contacts = persister.load
-            expect(contacts).to eq(ContactsDisplay::DUMMY_CONTACTS)
+            expect(persister.load).to eq(contacts)
+        end
+
+        it 'raises an exception if loading an empty file' do
+            expect {persister.load}.to raise_error(ContactLoadError)
         end
     end
 
     describe "#save" do
         it "saves data" do
-            file = Tempfile.new('db')
-            persister = ContactPersister.new(file.path) 
-            saved_contacts = ContactsDisplay::DUMMY_CONTACTS
-            saved_file = persister.save(saved_contacts)
+            persister.save(contacts)
             loaded_contacts = persister.load
-            expect(loaded_contacts).to eq(saved_contacts)
+            expect(loaded_contacts).to eq(contacts)
         end
     end 
-
-    def create_db(file)
-        json = ContactsDisplay::DUMMY_CONTACTS.to_json
-        file.write(json)
-        file.close 
-        return file.path
-    end
 end
