@@ -3,26 +3,26 @@ require "contact_load_error"
 
 class ContactPersister    
 
-    def initialize(db)
-        @db = db
+    def initialize(file_path)
+        @file_path = file_path
     end
 
-    def load
-        JSON.parse(loaded_contacts, {symbolize_names: true})
+    def load_json
+        JSON.parse(load, {symbolize_names: true})
     rescue JSON::ParserError 
         raise ContactLoadError
     end
 
     def save(contacts)
-        file = File.open(@db,"w+")
+        file = File.open(@file_path,"w+")
         file.write(contacts.to_json)
         file.close
     end
 
     private
 
-    def loaded_contacts
-        File.new(@db).read
+    def load
+        File.new(@file_path).read
     end
 end
 

@@ -1,4 +1,5 @@
 require "json"
+require "contacts_generator"
 require "contact_persister"
 require "tempfile"
 
@@ -12,21 +13,29 @@ describe ContactPersister do
         file.close 
     end
 
-    describe "#load" do
+    describe "#load_json" do
         it "loads all data" do
             create_db(file)
-            expect(persister.load).to eq(contacts)
+            expect(persister.load_json).to eq(contacts)
         end
 
         it 'raises an exception if loading an empty file' do
-            expect {persister.load}.to raise_error(ContactLoadError)
+            expect {persister.load_json}.to raise_error(ContactLoadError)
+        end
+
+        it 'saves 10 contacts to the db3.rb file' do 
+            list = list_generator(10)
+            persister = ContactPersister.new('/Users/priya10487/.con_man/db3.rb')
+            persister.save(list)
+            expect(persister.load_json).to eq(list)
+            
         end
     end
 
     describe "#save" do
         it "saves data" do
             persister.save(contacts)
-            loaded_contacts = persister.load
+            loaded_contacts = persister.load_json
             expect(loaded_contacts).to eq(contacts)
         end
     end 

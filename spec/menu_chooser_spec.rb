@@ -37,16 +37,9 @@ describe MenuChooser do
             expect(output.string.chomp).to include("Enter the details of any changes you would like to make:")
         end
 
-        it "saves to a file" do
-            contact_persister_double = instance_double("ContactPersister")
-            saved_contacts = {:first_name => "Samuel", :last_name =>"Ann"}
-            saved_contacts_file = ContactPersisterDouble.new.save(saved_contacts)
-            expect(saved_contacts_file).to include("Samuel")
-        end
-
         it "start loads a file" do
             input = StringIO.new("2\nY\nY")
-            expect(chooser(input).start).to receive(:load)
+            expect(chooser(input).start).to receive(:load_json)
             chooser(input).start
         end
 
@@ -58,7 +51,7 @@ describe MenuChooser do
 
         def chooser(input)
             screens = [CreateScreen,ViewScreen,UpdateScreen,DeleteScreen]
-            MenuChooser.new(contacts,persister,input,output,screens)
+            MenuChooser.new(persister,input,output,screens)
         end
 
         class ScreenDouble
@@ -78,8 +71,7 @@ describe MenuChooser do
         end
 
         class ContactPersisterDouble
-
-            def load
+            def load_json
                 json = ContactsDisplay::DUMMY_CONTACTS.to_json
             end
 
