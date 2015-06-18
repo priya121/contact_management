@@ -1,3 +1,6 @@
+require "contact_chooser"
+
+
 class Delete
     def initialize(contacts,input,output)
         @contacts = contacts
@@ -6,7 +9,6 @@ class Delete
     end
 
     def remove_contact
-        deleted_contact = ContactChooser.new(@contacts,@input,@output).contact_chosen
-         @contacts.delete_at(deleted_contact)
+         @contacts.delete_at(@input)
     end
 end

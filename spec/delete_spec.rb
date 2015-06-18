@@ -5,7 +5,7 @@ require "delete"
         end
         describe "#remove_contact" do
             it "deletes a contact when a user selects a contact" do 
-                input = StringIO.new("4")
+                input = 3    
                 delete = Delete.new(@contacts,input,output)
                 expect(delete.remove_contact).not_to include("Sam")
             end
