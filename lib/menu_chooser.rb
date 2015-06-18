@@ -15,14 +15,15 @@ class MenuChooser
     def show
         show_screen_titles
         @choice = @input.gets.to_i - 1
-        screen = @screens[@choice].new(@contact_persister,@input,@output)
+        screen = @screens[@choice].new(@contacts,@input,@output)
         screen.show
     end
 
     def start
-        @persister = @contact_persister.load_json
+        @contacts = @contact_persister.load_json
+        show
         @output.puts "Would you like to exit?"
-        if @input.gets.chomp == "Y"
+        if @input.gets.chomp == 'Y'
             @output.puts "Exiting"
         else 
             start
@@ -34,7 +35,7 @@ class MenuChooser
     def show_screen_titles
         @output.puts "What would you like to do?"
         @screens.each_with_index do |screen_class,i|
-            screen = screen_class.new(@persister ,@input, @output)
+            screen = screen_class.new(@contacts ,@input, @output)
             @output.puts "#{i+1}) " + screen.title
         end
         @output.puts "\nEnter your choice:"
