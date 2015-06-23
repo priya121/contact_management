@@ -21,8 +21,7 @@ class DeleteScreen
         @output.puts "Are you sure you want to delete this contact?"
         confirmation = @input.gets.chomp
         if confirmation == "Y"
-        deleted_contact = Delete.new(@contacts,chosen_id,@output).remove_contact
-        @output.puts deleted_contact
+        @output.puts Delete.new(@contacts,chosen_id,@output).remove_contact
         @output.puts "Contact successfully deleted" 
         else
             @input.gets == "N"

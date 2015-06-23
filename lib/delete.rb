@@ -9,6 +9,6 @@ class Delete
     end
 
     def remove_contact
-         @contacts.delete_at(@input)
+         deleted_contact = @contacts.delete_at(@input)
     end
 end
