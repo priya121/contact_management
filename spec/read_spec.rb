@@ -7,7 +7,7 @@ describe Read do
     describe "#fetch contact" do 
         it "returns the second contact if 2 is entered" do 
             read = Read.new(@contacts,2)
-            expect(read.fetch_contact).to eq({:first_name=>"Bob", :last_name => "Smith", :dob=> "02.12.1988", :address=> "10 Cedars Road", :postcode=> "KT11 1RY"})
+            expect(read.fetch_contact).to eq({:first_name=>"Annabel", :last_name => "Evans", :dob=> "11.12.1999", :address=> "01 Rosebury Av", :postcode=> "EC12 8CY"})
         end
     end
 end

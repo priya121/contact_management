@@ -14,7 +14,7 @@ class CreateScreen
     end
 
     def show
-        @output.print "Enter the fields you would like to change:"
+        @output.print "Enter the fields you would like to change:\n"
         @output.print "First name:"
         @first_name = @input.gets 
         @output.print "Last name:"

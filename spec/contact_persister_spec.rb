@@ -24,7 +24,7 @@ describe ContactPersister do
         end
 
         it 'saves 10 contacts to the db3.rb file' do 
-            list = list_generator(10)
+            list = list_generator(100)
             persister = ContactPersister.new('/Users/priya10487/.con_man/db3.rb')
             persister.save(list)
             expect(persister.load_json).to eq(list)

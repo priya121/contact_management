@@ -18,5 +18,3 @@ class ContactChooser
        @input.gets.to_i - 1
     end
 end
-
-
