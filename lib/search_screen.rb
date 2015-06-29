@@ -8,6 +8,6 @@ class SearchScreen
     end
 
     def show_filtered_contacts
-       @output.puts ContactSearcher.new(@contacts).filtered_array(@input)
+       @output.puts ContactSearcher.new(@contacts,@input,@output).filtered_array(@input)
     end
 end
