@@ -1,4 +1,3 @@
-require 'io/console'
 require 'search_screen'
 
 class ContactSearcher 

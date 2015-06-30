@@ -11,28 +11,18 @@ describe ContactSearcher do
   end
 
   it 'if no filter returns all contacts' do
-    contacts = [{:first_name => "Emma", 
-                 :last_name => "Jones", 
-                 :dob => "12.08.1997", 
-                 :address => "11 Emerald Road", 
-                 :postcode => "EC1Y SXY"}]
+    contacts = [{:first_name => "Emma"}]
     filtered_contacts = ContactSearcher.new(contacts).filter("")
     expect(filtered_contacts).to eq(contacts)
   end
 
   it 'returns list of 1 if there is a match' do 
-    contacts = [{:first_name => "Emma", 
-                 :last_name => "Jones", 
-                 :dob => "12.08.1997", 
-                 :address => "11 Emerald Road", 
-                 :postcode => "EC1Y SXY"},
-                {:first_name => "Sam", 
-                 :last_name => "Smith", 
-                 :dob => "01.11.1976", 
-                 :address => "03 Hatton Garden", 
-                 :postcode => "EC1R 6JP"}]
+    contacts = [{:first_name => "Emma"},
+                {:first_name => "Sam"}]
     filtered_contacts = ContactSearcher.new(contacts).filter("E")
+    
     expect(filtered_contacts.length).to eq(1)
+    expect(filtered_contacts[0][:first_name]).to eq("Emma")
   end
 
   it 'returns list of all matching contact' do
@@ -41,6 +31,10 @@ describe ContactSearcher do
   end
 
     def load_four_contacts
+      #put four contacts
       ContactsDisplay::DUMMY_CONTACTS
     end
+
+    #new method for filtered_contacts
+
 end
