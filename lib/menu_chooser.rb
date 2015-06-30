@@ -2,10 +2,10 @@ require "contact_persister"
 require "create_screen"
 require "delete_screen"
 require "update_screen"
-require "view_screen"
+require "search_screen"
 
 class MenuChooser
-    def initialize(contact_persister,input,output,screens = [CreateScreen,ViewScreen,UpdateScreen,DeleteScreen])
+    def initialize(contact_persister,input,output,screens = [CreateScreen,SearchScreen,UpdateScreen,DeleteScreen])
         @contact_persister = contact_persister
         @input = input
         @output = output

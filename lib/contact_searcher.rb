@@ -1,15 +1,18 @@
-class ContactSearcher
-  def initialize(contacts,input,output)
+require 'io/console'
+require 'search_screen'
+
+class ContactSearcher 
+  def initialize(contacts)
     @contacts = contacts
-    @input = input
-    @output = output
   end
 
-  def filtered_array(input)
-    filtered_contacts = []
-    @contacts.select {|contact| if contact[:first_name].start_with?(input.to_s)
-      filtered_contacts << contact
-  end}
-  filtered_contacts
-end
+  def filter(string)
+    if string == ""
+      @contacts 
+    else
+      @contacts.select do |contact|
+        contact[:first_name].start_with?(string)
+      end
+    end
+  end
 end

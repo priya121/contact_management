@@ -10,13 +10,13 @@ describe MenuChooser do
     it "displays list of screens" do
         input = StringIO.new("")
         chooser(input).show
-        expect(output.string).to include("2) View a contact")
+        expect(output.string).to include("2) Search for a contact")
     end
 
-    it "goes to the correct screen - viewscreen when 3 is entered" do
+    it "goes to the correct screen - viewscreen when 2 is entered" do
         input = StringIO.new("2\nY")
         puts chooser(input).show
-        expect(output.string).to include("Which contact would you like to view?")
+        expect(output.string).to include("Enter a letter to filter or enter to select:")
     end
 
     it "goes to the create a contact page if 1 is entered" do
@@ -50,7 +50,7 @@ describe MenuChooser do
     end
 
     def chooser(input)
-        screens = [CreateScreenDouble,ViewScreenDouble,UpdateScreenDouble,DeleteScreenDouble]
+        screens = [CreateScreenDouble,SearchScreenDouble,UpdateScreenDouble,DeleteScreenDouble]
         MenuChooser.new(persister,input,output,screens)
     end
 
@@ -70,7 +70,7 @@ describe MenuChooser do
         end
     end
 
-    class ViewScreenDouble
+    class SearchScreenDouble
         def initialize(contacts,input,output)
             @contacts = contacts
             @input = input
@@ -78,11 +78,11 @@ describe MenuChooser do
         end
 
         def title
-            "View a contact" 
+            "Search for a contact" 
         end
 
         def show
-            @output.puts "Which contact would you like to view?"
+            @output.puts "Enter a letter to filter or enter to select:"
         end
     end
 

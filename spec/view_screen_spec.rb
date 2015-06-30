@@ -7,12 +7,12 @@ describe ViewScreen do
     let(:output) {StringIO.new("")}
 
     describe "#show" do
-        it "shows Anna Smith when key 1 is pressed" do 
+        xit "shows Anna Smith when key 1 is pressed" do 
             ViewScreen.new(loaded_file,input,output).show
             expect(output.string).to include("Anna")
         end
 
-        it "shows Annabel Evans and Anna Smith when A is pressed" do
+        xit "shows Annabel Evans and Anna Smith when A is pressed" do
             ViewScreen.new(loaded_file,input,output).show
             expect(output.string).to include("Alex")
         end
