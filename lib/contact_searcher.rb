@@ -7,11 +7,15 @@ class ContactSearcher
 
   def filter(string)
     if string == ""
-      @contacts 
+      return  @contacts 
     else
-      @contacts.select do |contact|
-        contact[:first_name].start_with?(string)
+      filtered_contacts = []
+      @contacts.map do |contact|
+        if contact[:first_name].start_with?(string.to_s)
+          filtered_contacts << contact
+        end
       end
+      filtered_contacts 
     end
   end
 end

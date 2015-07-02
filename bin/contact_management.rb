@@ -9,7 +9,7 @@ contacts_file_path = '/Users/priya10487/.con_man/db3.rb'
 begin
     contacts_persister = ContactPersister.new(contacts_file_path)
     
-    MenuChooser.new(contacts_persister,Kernel,Kernel).start
+    MenuChooser.new(contacts_persister,STDIN,Kernel).start
     puts "\e[H\e[2J"
 rescue ContactLoadError
     puts "Con Man (tm): Contacts cannot be loaded in #{contacts_file_path}"
