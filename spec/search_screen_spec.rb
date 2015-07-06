@@ -21,9 +21,9 @@ describe SearchScreen do
 
     it 'chooses between two contacts' do 
       @contacts = [EMMA,SAM]
-      @input = StringIO.new("\n\n1\n")
+      @input = StringIO.new("\n1\n")
       show
-      expect(output.string.scan(/Emma/).length).to eq(2)
+      expect(output.string.scan(/Emma/).length).to eq(1)
     end
     
     it 'displays two contacts' do 
@@ -46,14 +46,14 @@ describe SearchScreen do
       @contacts = [EMMA, SAM]
       @input = StringIO.new("\n1\n")
       show
-      expect(output.string).to include("Enter a letter to filter or hit enter to select a contact")
+      expect(output.string).to include("Enter a letter to filter or select a contact")
     end
 
     it 'displays a filtered list when user enters Ann' do
     @contacts = [ANNA, ANABEL, DANIEL]
     @input = StringIO.new("Ann\n1\n")
     show
-    expect(output.string).to include("Showing 1 of 3 contacts.")
+    expect(output.string).to include("Showing 2 of 15 contacts.")
     end
 
     it 'returns a full list when the user hits enter' do
@@ -65,10 +65,23 @@ describe SearchScreen do
 
     it 'asks the user to enter from a filtered list' do
       @contacts = [DANIEL,DEBORAH,ANNA,ANABEL,SAM,EMMA]
-      @input = StringIO.new("A\n\n1\n")
+      @input = StringIO.new("A\n1\n")
       show
-      expect(output.string.scan(/Anna/).length).to eq(3)
+      expect(output.string.scan(/Anna/).length).to eq(2)
+    end
 
+    it 'shows 15 of the total contacts when filtering contacts' do 
+      @contacts = [DANIEL,DEBORAH,ANNA,ANABEL,SAM,EMMA,DANIEL,ANNA,DANIEL,SAM,DEBORAH,ANNA,DANIEL,DEBORAH,EMMA]
+      @input = StringIO.new("A\n\n")
+      show
+      expect(output.string).to include("Showing 4 of 15 contacts")
+    end
+
+    it 'displays - There are no contacts - for empty contact' do
+      @contacts = []
+      @input = StringIO.new("\n")
+      show
+      expect(output.string).to include("There are no contacts.")
     end
 
     def show

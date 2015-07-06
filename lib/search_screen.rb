@@ -13,41 +13,31 @@ class SearchScreen
   end
 
   def show
-    @found_contacts = @contacts
-    empty_contacts 
     if @contacts.length > 0
       filter_loop
+    else @contacts.length == 0
+      @output.print "There are no contacts."
     end
   end
 
-  private 
-
+private 
   def filter_loop
     @filter = ""
     @character = ""
-    while @character != ENTER
-      @output.puts "Enter a letter to filter or hit enter to select a contact:"
+    @output.puts "Enter a letter to filter or select a contact:"
+    while @character != "\n"
       @filter += @character
       @result = filter_by_character
       show_found_contacts_list
       @character = get_char
       if @character.to_i > 0 
-        display_selected(filter_by_number(@character))
+        display_selected(filter_by_number(@input.gets.to_i))
       end
-    end
-    enter_key_pressed
-  end
-
-  def enter_key_pressed
-    if get_char == ENTER
-      @output.puts "Select a contact or press enter to exit:"
-      @output.puts display_selected(filter_by_number(@input.gets.to_i))
     end
   end
 
   def filter_by_character
     @found_contacts = ContactSearcher.new(@contacts).filter(@filter)
-    @found_contacts
   end
 
   def filter_by_number(number)
@@ -60,9 +50,11 @@ class SearchScreen
   end
 
   def show_found_contacts_list
-    total = @contacts.length
-    num = [@found_contacts.length,total].min 
-    @output.puts "Showing #{num} of #{total} contacts."
+    max_total = 15
+    num = [@found_contacts.length,max_total].min 
+    if num > 1 
+      @output.puts "Showing #{num} of #{max_total} contacts."
+    end
     display_contact_list(@result)
   end
 
@@ -70,12 +62,6 @@ class SearchScreen
     contacts_list.each_with_index do |contact,i|
       choice = (i + 1).to_s
       @output.puts choice + ") " + name(contact)
-    end
-  end
-
-  def empty_contacts
-    if @contacts.length == 0
-      @output.print "There are no contacts."
     end
   end
 
