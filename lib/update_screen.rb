@@ -18,8 +18,8 @@ class UpdateScreen
     subscreen = FilterSubscreen.new(@contacts,@input,@output)
     filtered_contact = subscreen.show
     @result = @contacts.index(filtered_contact)
-    @output.puts "Are you sure you want to update the following contact? (Y/N): #{filtered_contact[:first_name]} #{filtered_contact[:last_name]}"
-    if @input.gets.chomp == "Y"
+    @output.puts "Are you sure you want to update the following contact? (Y/N): #{filtered_contact}"
+    if @input.gets == "Y"
       @output.puts "Enter the details of any changes you would like to make:"
       update_contact
     end
