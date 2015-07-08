@@ -15,6 +15,7 @@ class ContactChooser
     end
 
     def contact_chosen 
+
        @input.gets.to_i - 1
     end
 end

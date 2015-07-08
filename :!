@@ -20,9 +20,9 @@ describe DeleteScreen do
   end
 
   it "updates the dummy hash so that it no longer contains the deleted contact" do
-    @input = StringIO.new("Annab\n1\n1\nY\nY\n")
+    @input = StringIO.new("Annab\n1\n1\nY\nY")
     delete
-    expect(output.string).not_to include("Annabel")
+    expect(output.string).to include("Contact successfully deleted")
   end
 
   it "returns a full display of contacts if the user enters N" do 
@@ -37,6 +37,11 @@ describe DeleteScreen do
     expect(output.string).to include("Enter a letter to filter or select a contact:")
   end
 
+  it 'deletes the filtered contact' do
+    @input = StringIO.new("\n1\nN")
+    delete
+    
+  end
 end
 
 class ContactPersisterDouble

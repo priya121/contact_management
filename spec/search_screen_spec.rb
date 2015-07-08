@@ -1,7 +1,7 @@
 require 'dummy_contacts_display'
 require 'search_screen'
 
-describe SearchScreen do 
+describe FilterSubscreen do 
     EMMA = {:first_name => "Emma", :last_name => "Evans"}
     SAM = {:first_name => "Sam", :last_name => "Patil"}
     DANIEL = {:first_name => "Daniel", :last_name => "Irvine"}
@@ -30,13 +30,13 @@ describe SearchScreen do
       @contacts = [EMMA,SAM]
       @input = StringIO.new("\n1\n")
       show
-      expect(output.string).to include("1) Emma Evans")
+      expect(output.string).to include("1) Emma Samuels")
       expect(output.string).to include("2) Sam Patil")
     end
 
     it 'displays one contact' do
       @contacts = [DANIEL, DEBORAH]
-      @input = StringIO.new("Deb\n1\n")
+      @input = StringIO.new("Deb\n1\n1")
       show
       expect(output.string.scan(/Deborah/).length).to eq(4)
       expect(output.string.scan(/Daniel/).length).to eq(2)
@@ -60,7 +60,7 @@ describe SearchScreen do
       @contacts = [DANIEL,DEBORAH,ANNA,ANABEL,SAM,EMMA]
       @input = StringIO.new("\n1\n")
       show
-      expect(output.string).to include("6) Emma Evans")
+      expect(output.string).to include("6) Emma Samuels")
     end
 
     it 'asks the user to enter from a filtered list' do
@@ -84,7 +84,19 @@ describe SearchScreen do
       expect(output.string).to include("There are no contacts.")
     end
 
+    it 'displays contact if there is only one contact with typed name after filtering' do 
+      @contacts = [DANIEL,DEBORAH,ANNA,ANABEL,SAM,EMMA,DANIEL,ANNA,DANIEL,SAM,DEBORAH,ANNA,DANIEL,DEBORAH,EMMA]
+
+    end
+
+    xit 'asks the user if they would like to see the details of the filtered user' do
+      @contacts = [DANIEL,DEBORAH,ANNA,ANABEL,SAM,EMMA,DANIEL,ANNA,DANIEL,SAM,DEBORAH,ANNA,DANIEL,DEBORAH,EMMA]
+      @input = StringIO.new("A\n\n")
+      show
+      expect(output.string).to include("Press enter if you would like to see the contact details of the filtered contact?")
+end
+
     def show
-      SearchScreen.new(@contacts,@input,output).show
+      FilterSubscreen.new(@contacts,@input,output).show
     end
 end

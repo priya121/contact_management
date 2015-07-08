@@ -2,6 +2,10 @@ require "view_screen"
 require "contact_persister"
 
 describe ViewScreen do  
+    EMILY = {:first_name => "Emily", :last_name => "Simpson"}
+    HOLLY = {:first_name => "Holly", :last_name => "Berner"}
+    JESS = {:first_name => "Jess", :last_name => "Reynolds"}
+
     let(:loaded_file) {ContactPersisterDouble.new.load}
     let(:input) {StringIO.new("A")}
     let(:output) {StringIO.new("")}
@@ -16,6 +20,12 @@ describe ViewScreen do
             ViewScreen.new(loaded_file,input,output).show
             expect(output.string).to include("Alex")
         end
+
+      def view_screen
+         ViewScreen.new(@contacts,@input,output).show
+      end
+
+
 
     class ContactPersisterDouble
         def load

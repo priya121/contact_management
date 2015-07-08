@@ -17,15 +17,14 @@ class DeleteScreen
 
   def show 
     @output.puts "Select a contact to delete:"
-    screen = FilterSubscreen.new(@contacts,@input,@output)
-     filtered_contact = screen.show
-    result = @contacts.index(filtered_contact)
+    filtered_contact = SearchScreen.new(@contacts,@input,@output).show
+    puts filtered_contact.index_filtered_contact.inspect
+    index = filtered_contact.index.filtered_contact
     @output.puts "Are you sure you want to delete this contact?"
     confirmation = @input.gets.chomp
-    if confirmation == "Y\n"
-      deleted = Delete.new(@contacts,result,@output)
-      deleted_contact = deleted.remove_contact
-      @output.puts "The contact #{deleted_contact[:first_name] } #{deleted_contact[:last_name]} has been deleted from contacts."
+    if confirmation == "Y"
+      chosen_id = ContactChooser.new(@contacts,@input,@output).contact_chosen
+      @output.puts Delete.new(@contacts,index_of_filtered_contact,@output).remove_contact
       @output.puts "Contact successfully deleted" 
     else
       @input.gets == "N"

@@ -14,15 +14,19 @@ class UpdateScreen
   end
 
   def show 
-    @output.puts "Choose a contact to Update:"
-    list = ContactChooser.new(@contacts,@input,@output).show_contacts_list
-    @chosen_id = @input.gets.to_i - 1
-    @output.puts "Enter the details of any changes you would like to make:"
-    update_contact
+    @output.puts "Update a contact."
+    subscreen = FilterSubscreen.new(@contacts,@input,@output)
+    filtered_contact = subscreen.show
+    @result = @contacts.index(filtered_contact)
+    @output.puts "Are you sure you want to update the following contact? (Y/N): #{filtered_contact[:first_name]} #{filtered_contact[:last_name]}"
+    if @input.gets.chomp == "Y"
+      @output.puts "Enter the details of any changes you would like to make:"
+      update_contact
+    end
   end
 
   def first_name
-    old_first_name = @contacts[@chosen_id][:first_name]
+    old_first_name = @contacts[@result][:first_name]
     @output.puts "Current First Name: #{old_first_name}"
     @output.puts "New First Name (leave blank to keep):"
     first_name = @input.gets || 
@@ -32,7 +36,7 @@ class UpdateScreen
   end 
 
   def last_name
-    old_last_name = @contacts[@chosen_id.to_i][:last_name]
+    old_last_name = @contacts[@result.to_i][:last_name]
     @output.puts "Current Last Name: #{old_last_name}"
     @output.puts "New Last Name (leave blank to keep):"
     last_name = @input.gets || 
@@ -42,7 +46,7 @@ class UpdateScreen
   end
 
   def dob
-    old_dob = @contacts[@chosen_id.to_i][:dob]
+    old_dob = @contacts[@result.to_i][:dob]
     @output.puts "New d.o.b: (leave blank to keep):"
     dob = @input.gets ||
       if @input.gets == ""
@@ -51,7 +55,7 @@ class UpdateScreen
   end
 
   def address
-    old_address = @contacts[@chosen_id.to_i][:address]
+    old_address = @contacts[@result.to_i][:address]
     @output.puts "New Address (leave blank to keep):"
     address = @input.gets ||
       if @input.gets == ""
@@ -60,7 +64,7 @@ class UpdateScreen
   end
 
   def postcode
-    old_postcode = @contacts[@chosen_id.to_i][:postcode]
+    old_postcode = @contacts[@result.to_i][:postcode]
     @output.puts "New Postcode (leave blank to keep):"
     postcode = @input.gets || 
       if @input.gets == ""
@@ -69,7 +73,7 @@ class UpdateScreen
   end
 
   def update_contact
-    updated_contact = Update.new(@contacts,first_name,last_name,dob,address,postcode,@chosen_id)
+    updated_contact = Update.new(@contacts,first_name,last_name,dob,address,postcode,@result)
     updated_contacts_list = updated_contact.update
     @output.puts "First Name: #{updated_contacts_list[:first_name]}"
     @output.puts "Last Name: #{updated_contacts_list[:last_name]}"
