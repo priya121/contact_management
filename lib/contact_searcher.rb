@@ -1,4 +1,4 @@
-require 'search_screen'
+require 'filter_subscreen'
 
 class ContactSearcher 
   def initialize(contacts)

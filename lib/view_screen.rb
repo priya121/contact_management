@@ -1,4 +1,4 @@
-require "search_screen"
+require "filter_subscreen"
 require "contact_searcher"
 require "dummy_contacts_display"
 require "read"

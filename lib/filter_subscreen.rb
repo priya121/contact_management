@@ -25,23 +25,21 @@ class FilterSubscreen
   def filter_loop
     @filter = ""
     @character = ""
-    @output.puts "Enter a letter to filter or select a contact:"
+    @output.puts "Enter a letter to filter or hit enter to select a contact:"
     while @character != "\n"
       @filter += @character
       @result = filter_by_character
       show_found_contacts_list
       @character = get_char
-      contact_number_selected
-      end
+    end
+    contact_number_selected
     @filtered
   end
 
   def contact_number_selected 
-      if @character.to_i > 0 
         selected_contact_number = @input.gets.to_i
         display_selected(filter_by_number(selected_contact_number))
        @filtered = filter_by_number(selected_contact_number) 
-      end
   end
 
   def filter_by_character
