@@ -26,12 +26,13 @@ class FilterSubscreen
     @filter = ""
     @character = ""
     @output.puts "Enter a letter to filter or hit enter to select a contact:"
-    while @character != "\n"
+    while @character != ENTER
       @filter += @character
       @result = filter_by_character
       show_found_contacts_list
       @character = get_char
     end
+    @output.puts "Enter key hit, select a contact by number."
     contact_number_selected
     @filtered
   end
@@ -60,6 +61,7 @@ class FilterSubscreen
     num = [@found_contacts.length,15].min 
     if num > 1 
       @output.puts "Showing #{num} of 15 contacts."
+      @output.puts "Hit enter to select a contact by number."
     end
     display_contact_list(@result)
   end

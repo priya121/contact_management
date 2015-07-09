@@ -1,3 +1,4 @@
+require "contacts_generator"
 require "contact_persister"
 require "create_screen"
 require "delete_screen"
@@ -13,13 +14,21 @@ class MenuChooser
     end
 
     def show
-        show_screen_titles
-        @choice = @input.gets.to_i - 1
-        screen = @screens[@choice].new(@contacts,@input,@output)
-        screen.show
+      show_screen_titles
+      @choice = @input.gets.to_i - 1
+      screen = @screens[@choice].new(@contacts,@input,@output)
+      screen.show
+    end
+
+    def generate_addressbook
+      
     end
 
     def start
+      @output.puts "Would you like to generate random new contacts?"
+      if @input.gets == "Y\n"
+        contacts_file = ContactPersister.new('/Users/priya10487/.con_man/db4.rb').save(list_generator(20))
+      end
         @contacts = @contact_persister.load_json
         show
         @output.puts "Would you like to exit?"

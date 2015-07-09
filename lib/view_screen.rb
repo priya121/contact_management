@@ -17,7 +17,7 @@ class ViewScreen
     end
 
     def show
-        selected_contact = FilterSubsreen.new(@contacts,@input,@output).show 
+        selected_contact = FilterSubscreen.new(@contacts,@input,@output).show 
         @output.puts "Enter the number of the contact would you like to view or enter the first character of their first name to filter:"
         contacts_list = ContactChooser.new(@contacts,@input,@output).show_contacts_list
         index = ContactChooser.new(@contacts,@input,@output).contact_chosen

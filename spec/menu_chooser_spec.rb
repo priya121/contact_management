@@ -6,6 +6,7 @@ describe MenuChooser do
     let(:output) {StringIO.new("")}
     let(:persister) {double().as_null_object}
     let(:contacts) {double().as_null_object}
+    let(:file_path) {'/Users/priya10487/.con_man/db4.rb'}
 
     it "displays list of screens" do
         input = StringIO.new("")
@@ -13,10 +14,10 @@ describe MenuChooser do
         expect(output.string).to include("2) Search for a contact")
     end
 
-    it "goes to the correct screen - viewscreen when 2 is entered" do
+    xit "goes to the correct screen - viewscreen when 2 is entered" do
         input = StringIO.new("2\nY")
-        puts chooser(input).show
-        expect(output.string).to include("Enter a letter to filter or enter to select:")
+        chooser(input).show
+        expect(output.string).to include("Enter a letter to filter or enter a number to select:")
     end
 
     it "goes to the create a contact page if 1 is entered" do
@@ -47,6 +48,18 @@ describe MenuChooser do
         input = StringIO.new("2\nY\nY")
         expect(persister).to receive(:save)
         chooser(input).start
+    end
+
+    xit "asks the user if they would like to generate new contacts" do 
+      input = StringIO.new("")
+      chooser(input).show
+      expect(output.string).to include("Would you like to generate new contacts?")
+    end
+
+    xit 'generates 20 new contacts if the user chooses Y' do 
+      input = StringIO.new("Y\n")
+      new_menu = chooser(input).show
+      expect(File.size(file_path)).to eq(20)
     end
 
     def chooser(input)
