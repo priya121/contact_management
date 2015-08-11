@@ -1,4 +1,4 @@
-# contact_management
+# Contact Management Application
 
 
 With this contact management application you can create, view, update and delete contacts from a file that you choose. You can load sample data by requesting to do so and entering the file path you would like the contacts to be saved to when the program starts. You can store the first name, last name, date of birth, address and postcode of your contacts.
@@ -6,7 +6,7 @@ With this contact management application you can create, view, update and delete
 Create
 ------
 
-Selecting 1 takes you to the create a contact screen that allows you to create a new contact. After being prompted to enter the relevant fields a new contact will then added to the file loaded by the Contact Persister, so that you can search for it later via the other subscreens.
+Selecting 1 takes you to the create a contact screen that allows you to create a new contact. After being prompted to enter the relevant fields a new contact will then added to the file loaded by the Contact Persister class so that you can search for it later via the other subscreens.
 
 View
 ----
